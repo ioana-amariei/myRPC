@@ -1,5 +1,7 @@
 #include <iostream>
+#include "rapidxml/rapidxml.hpp"
 using namespace std;
+using namespace rapidxml;
 
 
 #include "Client.h"
