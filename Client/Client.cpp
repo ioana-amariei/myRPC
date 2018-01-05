@@ -13,13 +13,7 @@
 
 #include "Client.h"
 #include "Helpers.h"
-
-
-//#include "rapidxml/rapidxml.hpp"
-//#include "rapidxml/rapidxml_print.hpp"
-
-using namespace std;
-//using namespace rapidxml;
+#include "GUI.h"
 
 
 #include "pugixml/src/pugixml.hpp"
@@ -28,12 +22,16 @@ using namespace std;
 
 using namespace pugi;
 
+using namespace std;
+
+
 #define PORT 2024
 char*  HOST_ID = "127.0.0.1";
 
 
 Client::Client() {
     initializeStructure();
+    gui = new GUI();
 }
 
 int Client::createSocket() {
@@ -86,39 +84,11 @@ void Client::readBufferFromServer(int socketDescriptor) {
     int length = readInt(socketDescriptor);
     this->buffer = (char*) calloc (length, sizeof(char));
     this->buffer = readBuffer(socketDescriptor, length);
-//    printf(buffer);
-//
-//    xml_document<> doc;
-//    doc.parse<parse_non_destructive>(buffer);
-//
-//    cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
-//    xml_node<> *node = doc.first_node();
-//    cout << "Node operation has value " << node << "\n";
-//    node = node->first_node("operation");
-//
-//    xml_node<>* sib = 0;
-//    while ((sib = node->next_sibling()) != 0) {
-//        cout << sib;
-//    }
 
     cout << buffer << endl;
 
-    xml_document doc;
-    xml_parse_result result = doc.load_string(buffer);
-
-    if (!result) {
-        cout << "parsed with errors" << endl;
-        cout << result.description() << endl;
-    }
-
-    xml_node operations = doc.document_element();
-    for (xml_node operation : operations.children()) {
-        cout << "detalii" << endl;
-        cout << operation.child("name").child_value() << endl;
-        cout << operation.child("resultType").child_value() << endl;
-        cout << endl;
-    }
-
+    gui->createMainWindow();
+    gui->populateWindowWithOperations(buffer);
 
 }
 

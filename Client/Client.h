@@ -6,6 +6,7 @@
 #define CLIENT_CLIENT_H
 
 #include <netinet/in.h>
+#include "GUI.h"
 
 class Client {
 private:
@@ -13,6 +14,7 @@ private:
     struct sockaddr_in server;
     char message[100];
     char* buffer;
+    GUI* gui;
 
     sockaddr_in &initializeStructure();
 
