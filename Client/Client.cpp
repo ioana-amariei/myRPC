@@ -11,6 +11,7 @@
 #include <string.h>
 
 #include "Client.h"
+#include "Helpers.h"
 
 
 #define PORT 2024
@@ -65,6 +66,13 @@ void Client::readMessageFromServer(int socketDescriptor) {
     if (read(socketDescriptor, this->message, 100) < 0) {
         printf("[client]Error at read()from server.\n");
     }
+}
+
+void Client::readBufferFromServer(int socketDescriptor) {
+    int length = readInt(socketDescriptor);
+    this->buffer = (char*) calloc (length, sizeof(char));
+    this->buffer = readBuffer(socketDescriptor, length);
+    printf(buffer);
 }
 
 void Client::printMessage() {

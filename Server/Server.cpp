@@ -3,30 +3,21 @@
 //
 
 #include "Server.h"
-//
-// Created by ioana on 10.12.2017.
-//
 
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <errno.h>
 #include <unistd.h>
-#include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include <wait.h>
 
-#include "Server.h"
-#include "Helpers.h"
 
+Server::Server(int port) {
+    this->port = port;
 
-/* used port */
-#define PORT 2024
-
-Server::Server() {
     prepareDataStructures();
     initializeStructure();
+
+    createSocket();
+    bindSocket();
+    listenConnections();
 }
 
 void Server::prepareDataStructures() {
@@ -38,30 +29,26 @@ sockaddr_in &Server::initializeStructure() {
     /* establishing the family of sockets */
     this->server.sin_family = AF_INET;
     /* accept any address */
-    this-> server.sin_addr.s_addr = htonl(INADDR_ANY);
+    this->server.sin_addr.s_addr = htonl(INADDR_ANY);
     /* use a user port */
-    this->server.sin_port = htons(PORT);
+    this->server.sin_port = htons(port);
 
     return this->server;
 }
 
-
-
-int Server::createSocket() {
-    int socketDescriptor;
+void Server::createSocket() {
     if ((socketDescriptor = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
         printf("[server]Error at socket().\n");
     }
-    return socketDescriptor;
 }
 
-void Server::bindSocket(int socketDescriptor) {
+void Server::bindSocket() {
     if (bind(socketDescriptor, (struct sockaddr *) &this->server, sizeof(struct sockaddr)) == -1) {
         printf("[server]Error at bind().\n");
     }
 }
 
-void Server::listenConnections(int socketDescriptor) {
+void Server::listenConnections() {
     if (listen(socketDescriptor, 5) == -1) {
         printf("[server]Error at listen().\n");
     }
@@ -74,18 +61,17 @@ void Server::prepareResponseMessage() {
 }
 
 /* serve clients in a concurrent way*/
-void Server::serveClients(int socketDescriptor) {
+void Server::startServer() {
     while (1) {
-        int client;
         socklen_t length = sizeof(this->from);
 
-        printf("[server]Waiting at port %d...\n", PORT);
+        printf("[server]Waiting at port %d...\n", port);
         fflush(stdout);
 
-        client = accept(socketDescriptor, (struct sockaddr *) &this->from, &length);
+        int clientSocketDescriptor = accept(socketDescriptor, (struct sockaddr *) &this->from, &length);
 
         /* eroare la acceptarea conexiunii de la un client */
-        if (client < 0) {
+        if (clientSocketDescriptor < 0) {
             perror("[server]Error at accept().\n");
             continue;
         }
@@ -103,10 +89,10 @@ void Server::serveClients(int socketDescriptor) {
             fflush(stdout);
 
             /* read message */
-            if (read(client, this->receivedMessage, 100) <= 0) {
+            if (read(clientSocketDescriptor, this->receivedMessage, 100) <= 0) {
                 perror("[server]Error at read() from client.\n");
                 /* close this connexion */
-                close(client);
+                close(clientSocketDescriptor);
                 /* keep listening */
                 continue;
             }
@@ -117,9 +103,10 @@ void Server::serveClients(int socketDescriptor) {
 
             printf("[server]Send message back...%s\n", this->responseMessage);
 
+            sendFile(clientSocketDescriptor);
 
             /* return the client's message */
-            if (write(client, this->responseMessage, 100) <= 0) {
+            if (write(clientSocketDescriptor, this->responseMessage, 100) <= 0) {
                 perror("[server]Error at write() to the client.\n");
                 /* keep listening */
                 continue;
@@ -127,12 +114,52 @@ void Server::serveClients(int socketDescriptor) {
                 printf("[server]The message was successfully passed.\n");
             }
             /* close this connexion */
-            close(client);
+            close(clientSocketDescriptor);
         } else {
-            waitpid(client, &this->status, WNOHANG);
+            waitpid(clientSocketDescriptor, &this->status, WNOHANG);
         }
     }
 }
+
+// http://www.cplusplus.com/reference/cstdio/fread/
+void Server::sendFile(int socketDescriptor) {
+    FILE *file = fopen("/home/ioana/facultate/PROIECT-MY-RPC/myRPC/Server/procedures.xml", "r");
+
+    if (file == NULL) {
+        printf("[server]Cannot open file\n");
+        exit(1);
+    }
+
+    // obtain file size
+    fseek(file, 0, SEEK_END);
+    int length = ftell(file);
+    rewind(file);
+
+    // allocate memory to contain the whole file
+    char *buffer = (char *) calloc(length + 1, sizeof(char));
+    if (buffer == NULL) {
+        printf("Memory error\n");
+        exit(1);
+    }
+
+    // copy the file into the buffer
+    size_t result = fread(buffer, 1, length, file);
+    if (result != length) {
+        printf("Reading error\n");
+        exit(1);
+    }
+
+    // the whole file is now loaded in the memory buffer
+    // send file to client
+    writeInt(socketDescriptor, length);
+    writeBuffer(socketDescriptor, buffer);
+
+    // terminate
+    fclose(file);
+    free(buffer);
+}
+
+
 
 
 

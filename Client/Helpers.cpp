@@ -2,6 +2,10 @@
 // Created by ioana on 05.01.2018.
 //
 
+//
+// Created by ioana on 05.01.2018.
+//
+
 #include "Helpers.h"
 
 #include <cstring>
@@ -22,7 +26,7 @@ int readInt(int socketDescriptor) {
 
 void writeInt(int socketDescriptor, int value){
     if(write(socketDescriptor, &value, sizeof(value)) == -1){
-        printf("Error at writing integer: %d.\n", value);
+        printf("Error at writing an integer! \n");
         exit(1);
     }
 }
@@ -58,7 +62,7 @@ char* readBuffer(int socketDescriptor, int length){
 }
 
 void writeBuffer(int socketDescriptor, char* buffer){
-    long length = strlen(buffer);
+    int length = strlen(buffer);
     if(write(socketDescriptor, buffer, length) == -1){
         printf("Error at writing a string! \n");
         exit(1);

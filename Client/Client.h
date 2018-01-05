@@ -12,6 +12,7 @@ private:
     int socketDescriptor;
     struct sockaddr_in server;
     char message[100];
+    char* buffer;
 
     sockaddr_in &initializeStructure();
 
@@ -23,6 +24,7 @@ public:
     void readMessageFromTerminal();
     void sendMessageToServer(int socketDescriptor);
     void readMessageFromServer(int socketDescriptor);
+    void readBufferFromServer(int socketDescriptor);
     void printMessage();
     void closeConnection(int socketDescriptor);
 };

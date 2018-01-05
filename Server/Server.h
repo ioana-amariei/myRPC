@@ -18,19 +18,21 @@ private:
     char responseMessage[100] = " ";
     int status;
     int pid;
-
+    int socketDescriptor;
+    int port;
 
     void prepareDataStructures();
     sockaddr_in &initializeStructure();
     void prepareResponseMessage();
+    void sendFile(int socketDescriptor);
 
 public:
-    Server();
+    Server(int port);
 
-    int createSocket();
-    void bindSocket(int socketDescriptor);
-    void listenConnections(int socketDescriptor);
-    void serveClients(int socketDescriptor);
+    void createSocket();
+    void bindSocket();
+    void listenConnections();
+    void startServer();
 };
 
 

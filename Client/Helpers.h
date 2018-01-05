@@ -2,8 +2,8 @@
 // Created by ioana on 05.01.2018.
 //
 
-#ifndef MYRPC_HELPERS_H
-#define MYRPC_HELPERS_H
+#ifndef CLIENT_HELPERS_H
+#define CLIENT_HELPERS_H
 
 
 #include <string>
@@ -21,7 +21,4 @@ char* readBuffer(int socketDescriptor, int length);
 
 void writeBuffer(int socketDescriptor, char *buffer);
 
-
-#endif //MYRPC_HELPERS_H
-
-
+#endif //CLIENT_HELPERS_H

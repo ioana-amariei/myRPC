@@ -11,6 +11,7 @@ int main(){
     client.connectToServer(socketDescriptor);
     client.readMessageFromTerminal();
     client.sendMessageToServer(socketDescriptor);
+    client.readBufferFromServer(socketDescriptor);
     client.readMessageFromServer(socketDescriptor);
     client.printMessage();
 
