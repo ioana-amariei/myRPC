@@ -13,17 +13,7 @@
 
 #include "Client.h"
 #include "Helpers.h"
-#include "GUI.h"
-
-
-#include "pugixml/src/pugixml.hpp"
-#include "pugixml/src/pugixml.cpp"
-#include "pugixml/src/pugiconfig.hpp"
-
-using namespace pugi;
-
 using namespace std;
-
 
 #define PORT 2024
 char*  HOST_ID = "127.0.0.1";
@@ -31,7 +21,7 @@ char*  HOST_ID = "127.0.0.1";
 
 Client::Client() {
     initializeStructure();
-    gui = new GUI();
+    gui = new GUI(this);
 }
 
 int Client::createSocket() {

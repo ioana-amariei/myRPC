@@ -7,6 +7,7 @@
 
 #include <netinet/in.h>
 #include "GUI.h"
+class GUI;
 
 class Client {
 private:

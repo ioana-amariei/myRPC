@@ -3,5 +3,5 @@ project(Client)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp Client.cpp Client.h Helpers.cpp)
+set(SOURCE_FILES main.cpp Client.cpp Client.h Helpers.cpp GUI.cpp GUI.h)
 add_executable(Client ${SOURCE_FILES})
