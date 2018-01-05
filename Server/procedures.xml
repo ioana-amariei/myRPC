@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<operations>
+    <operation>
+        <name>add</name>
+        <arguments>
+            <type>int</type>
+            <type>int</type>
+        </arguments>
+        <resultType>int</resultType>
+    </operation>
+    <operation>
+        <name>substract</name>
+        <arguments>
+            <type>int</type>
+            <type>int</type>
+        </arguments>
+        <resultType>int</resultType>
+    </operation>
+    <operation>
+        <name>multiply</name>
+        <arguments>
+            <type>int</type>
+            <type>int</type>
+        </arguments>
+        <resultType>int</resultType>
+    </operation>
+    <operation>
+        <name>divide</name>
+        <arguments>
+            <type>int</type>
+            <Subtype>int</Subtype>
+        </arguments>
+        <resultType>int</resultType>
+    </operation>
+</operations>
