@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <list>
 using namespace std;
 
 int readInt(int socketDescriptor);
@@ -22,5 +23,7 @@ char* readBuffer(int socketDescriptor, int length);
 void writeBuffer(int socketDescriptor, const char *buffer);
 
 void writeBuffer(int socketDescriptor, string buffer);
+
+list<string> split(char *str, char* delimiters);
 
 #endif //CLIENT_HELPERS_H

@@ -2,6 +2,7 @@
 // Created by ioana on 05.01.2018.
 //
 #include "UI.h"
+#include "Helpers.h"
 #include <iostream>
 #include <sstream>
 
@@ -76,12 +77,21 @@ string UI::obtainRequestFromUser() {
     xml_document doc;
     xml_node requestNode = doc.append_child("request");
     requestNode.append_attribute("type") = "operationCall";
-    requestNode.append_child(pugi::node_pcdata).set_value(request);
+    xml_node operation = requestNode.append_child("operation");
+
+    list<string> tokens = split(request, " ");
+    string& name = tokens.front();
+    operation.append_child("name").append_child(pugi::node_pcdata).set_value(name.c_str());
+    tokens.pop_front();
+
+    xml_node arguments = requestNode.append_child("arguments");
+    for(string& argument : tokens) {
+        arguments.append_child("argument").append_child(pugi::node_pcdata).set_value(argument.c_str());
+    }
 
     stringstream ss;
     doc.save(ss,"  ");
 
-//    std::cout << "stream contents are:\n" << ss.str() << endl;
     return string(ss.str());
 }
 

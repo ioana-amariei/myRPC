@@ -12,6 +12,9 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <list>
+#include <string>
+using namespace std;
 
 
 int readInt(int socketDescriptor) {
@@ -71,4 +74,37 @@ void writeBuffer(int socketDescriptor, const char* buffer){
 
 void writeBuffer(int socketDescriptor, string buffer){
     writeBuffer(socketDescriptor, buffer.c_str());
+}
+
+bool contains(char* delimiters, char c){
+    int size = strlen(delimiters);
+    for(int i = 0; i< size;i++){
+        if(c == delimiters[i]){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
+// http://www.cplusplus.com/reference/cstring/strtok/
+list<string> split(char *str, char* delimiters) {
+    list<string> tokens;
+    int i = 0;
+    char *token = NULL;
+
+    token = strtok(str, delimiters);
+    if(token != NULL){
+        tokens.push_back(string(token));
+    }
+
+    while (token != NULL) {
+        token = strtok(NULL, delimiters);
+        if(token != NULL){
+            tokens.push_back(string(token));
+        }
+    }
+
+    return  tokens;
 }
