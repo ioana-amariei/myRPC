@@ -7,6 +7,7 @@
 
 
 #include <netinet/in.h>
+#include <string>
 #include "Helpers.h"
 
 
@@ -33,6 +34,8 @@ public:
     void bindSocket();
     void listenConnections();
     void startServer();
+
+    void sendResponse(int sd, string message);
 };
 
 

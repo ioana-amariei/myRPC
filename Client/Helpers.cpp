@@ -61,10 +61,14 @@ char* readBuffer(int socketDescriptor, int length){
     return buffer;
 }
 
-void writeBuffer(int socketDescriptor, char* buffer){
+void writeBuffer(int socketDescriptor, const char* buffer){
     int length = strlen(buffer);
     if(write(socketDescriptor, buffer, length) == -1){
         printf("Error at writing a string! \n");
         exit(1);
     }
+}
+
+void writeBuffer(int socketDescriptor, string buffer){
+    writeBuffer(socketDescriptor, buffer.c_str());
 }

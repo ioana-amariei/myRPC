@@ -6,30 +6,38 @@
 #define CLIENT_CLIENT_H
 
 #include <netinet/in.h>
-#include "GUI.h"
-class GUI;
+#include <string>
+#include "UI.h"
+
+using namespace std;
 
 class Client {
 private:
+    string *ip;
+    int port;
+
     int socketDescriptor;
     struct sockaddr_in server;
     char message[100];
-    char* buffer;
-    GUI* gui;
 
-    sockaddr_in &initializeStructure();
+    void initializeConnectionInfo();
+    void createSocket();
+    void connectToServer();
 
 public:
-    Client();
-
-    int createSocket();
-    void connectToServer(int socketDescriptor);
+    Client(const char ipAddress[], int port);
+    ~Client();
+    string getOperationListFromServer();
     void readMessageFromTerminal();
-    void sendMessageToServer(int socketDescriptor);
-    void readMessageFromServer(int socketDescriptor);
-    void readBufferFromServer(int socketDescriptor);
+    void sendMessageToServer();
+    string readMessageFromServer();
+    string readBufferFromServer();
     void printMessage();
-    void closeConnection(int socketDescriptor);
+    string makeOperationRequest(string request);
+
+    string getOperationListResponseFromServer() const;
+
+    void sendOperationListRequestToServer();
 };
 
 

@@ -7,6 +7,16 @@
 #include <unistd.h>
 #include <string.h>
 #include <wait.h>
+#include <iostream>
+
+
+#include "pugixml/src/pugixml.hpp"
+#include "pugixml/src/pugixml.cpp"
+#include "pugixml/src/pugiconfig.hpp"
+
+
+using namespace pugi;
+using namespace std;
 
 
 Server::Server(int port) {
@@ -70,9 +80,8 @@ void Server::startServer() {
 
         int clientSocketDescriptor = accept(socketDescriptor, (struct sockaddr *) &this->from, &length);
 
-        /* eroare la acceptarea conexiunii de la un client */
         if (clientSocketDescriptor < 0) {
-            perror("[server]Error at accept().\n");
+            perror("[server] Error at accept().\n");
             continue;
         }
 
@@ -88,37 +97,45 @@ void Server::startServer() {
             printf("[server]Waiting the message...\n");
             fflush(stdout);
 
-            /* read message */
-            if (read(clientSocketDescriptor, this->receivedMessage, 100) <= 0) {
-                perror("[server]Error at read() from client.\n");
-                /* close this connexion */
-                close(clientSocketDescriptor);
-                /* keep listening */
-                continue;
-            }
+            int size = readInt(clientSocketDescriptor);
+            char *requestBuffer = readBuffer(clientSocketDescriptor, size);
 
-            printf("[server]Message received...%s\n", this->receivedMessage);
+            printf("[server]Message received...%s\n", requestBuffer);
 
-            prepareResponseMessage();
+            string request(requestBuffer);
 
-            printf("[server]Send message back...%s\n", this->responseMessage);
+            xml_document doc;
+            xml_parse_result result = doc.load_string(request.c_str());
 
-            sendFile(clientSocketDescriptor);
+            string requestType = doc.document_element().attribute("type").value();
+            cout << requestType << endl;
 
-            /* return the client's message */
-            if (write(clientSocketDescriptor, this->responseMessage, 100) <= 0) {
-                perror("[server]Error at write() to the client.\n");
-                /* keep listening */
-                continue;
+            if (!result) {
+                cout << "Parsed with errors" << endl;
+                cout << result.description() << endl;
+                const char *buffer = "The request is not valid. The XML document could not be parsed.";
+                sendResponse(clientSocketDescriptor, buffer);
+            } else if (requestType.compare("operationList") == 0) {
+                sendFile(clientSocketDescriptor);
+            } else if (requestType.compare("operationCall") == 0) {
+                // TODO: expand logic
+                sendResponse(clientSocketDescriptor, "<response>2</response>"); // de implementat
             } else {
-                printf("[server]The message was successfully passed.\n");
+                cout << "Received an invalid request: " << request << endl;
+                const char *buffer = "The request is not valid. No such operation.";
+                sendResponse(clientSocketDescriptor, buffer);
             }
-            /* close this connexion */
+
             close(clientSocketDescriptor);
         } else {
             waitpid(clientSocketDescriptor, &this->status, WNOHANG);
         }
     }
+}
+
+void Server::sendResponse(int sd, string message) {
+    writeInt(sd, strlen(message.c_str()));
+    writeBuffer(sd, message.c_str());
 }
 
 // http://www.cplusplus.com/reference/cstdio/fread/
@@ -151,10 +168,8 @@ void Server::sendFile(int socketDescriptor) {
 
     // the whole file is now loaded in the memory buffer
     // send file to client
-    writeInt(socketDescriptor, length);
-    writeBuffer(socketDescriptor, buffer);
+    sendResponse(socketDescriptor, buffer);
 
-    // terminate
     fclose(file);
     free(buffer);
 }

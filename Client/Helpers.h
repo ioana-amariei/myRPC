@@ -19,6 +19,8 @@ void writeChar(int socketDescriptor, char value);
 
 char* readBuffer(int socketDescriptor, int length);
 
-void writeBuffer(int socketDescriptor, char *buffer);
+void writeBuffer(int socketDescriptor, const char *buffer);
+
+void writeBuffer(int socketDescriptor, string buffer);
 
 #endif //CLIENT_HELPERS_H

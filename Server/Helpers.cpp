@@ -57,7 +57,7 @@ char* readBuffer(int socketDescriptor, int length){
     return buffer;
 }
 
-void writeBuffer(int socketDescriptor, char* buffer){
+void writeBuffer(int socketDescriptor, const char* buffer){
     long length = strlen(buffer);
     if(write(socketDescriptor, buffer, length) == -1){
         printf("Error at writing a string! \n");

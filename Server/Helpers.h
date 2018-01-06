@@ -19,7 +19,7 @@ void writeChar(int socketDescriptor, char value);
 
 char* readBuffer(int socketDescriptor, int length);
 
-void writeBuffer(int socketDescriptor, char *buffer);
+void writeBuffer(int socketDescriptor, const char *buffer);
 
 
 #endif //MYRPC_HELPERS_H
