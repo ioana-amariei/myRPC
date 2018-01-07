@@ -18,10 +18,11 @@ private:
     Client *client;
 
 public:
-    UI(Client *client);
+    UI();
 
     void startUserInteraction();
 
+private:
     void displayAvailableOperations(string string1);
 
     string obtainRequestFromUser();

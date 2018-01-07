@@ -16,8 +16,7 @@ using namespace pugi;
 using namespace std;
 
 
-UI::UI(Client *client) {
-//    this->client = client;
+UI::UI() {
 }
 
 void UI::startUserInteraction() {
@@ -90,7 +89,7 @@ string UI::obtainRequestFromUser() {
     }
 
     stringstream ss;
-    doc.save(ss,"  ");
+    doc.save(ss, "  ");
 
     return string(ss.str());
 }

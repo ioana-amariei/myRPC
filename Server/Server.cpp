@@ -14,8 +14,6 @@
 #include "pugixml/src/pugiconfig.hpp"
 
 using namespace pugi;
-
-
 using namespace std;
 
 
@@ -64,7 +62,7 @@ void Server::listenConnections() {
     }
 }
 
-/* serve clients in a concurrent way*/
+
 void Server::startServer() {
     while (1) {
         socklen_t length = sizeof(this->from);
@@ -82,7 +80,7 @@ void Server::startServer() {
         this->pid = fork();
 
         if (this->pid < 0) {
-            perror("Error at fork(). \n");
+            perror("Error at fork().\n");
             continue;
         }
 
@@ -119,16 +117,14 @@ void Server::startServer() {
 
             close(clientSocketDescriptor);
         } else {
-            waitpid(clientSocketDescriptor, &this->status, WNOHANG);
+            // https://profs.info.uaic.ro/~eonica/rc/lab07e.html
+            waitpid(pid, &this->status, WNOHANG);
         }
     }
 }
 
 void Server::handleOperationCall(int sd, xml_document &doc) {
-    cout << "handleOpertionCall" << endl;
     string name = doc.document_element().child("operation").child("name").child_value();
-
-    cout << name << endl;
 
     if (name.compare("add") == 0) {
         handleAdd(sd, doc);
@@ -138,14 +134,11 @@ void Server::handleOperationCall(int sd, xml_document &doc) {
         handleMul(sd, doc);
     } else if (name.compare("div") == 0) {
         handleDiv(sd, doc);
-    }
-    else if(name.compare("sum") == 0){
+    } else if (name.compare("sum") == 0) {
         handleSum(sd, doc);
-    }
-    else if(name.compare("to_uppercase") == 0){
+    } else if (name.compare("to_uppercase") == 0) {
         handleToUppercase(sd, doc);
-    }
-    else{
+    } else {
         sendResponse(sd, "<response>The operation is not defined.</response>");
     }
 }
@@ -154,13 +147,13 @@ void Server::handleOperationCall(int sd, xml_document &doc) {
 void Server::handleSum(int sd, xml_document &doc) {
     xml_node arguments = doc.document_element().child("operation").child("arguments");
 
-    if(countArguments(arguments) < 1) {
+    if (countArguments(arguments) < 1) {
         sendResponse(sd, "<response>The operation must have at least one argument.</response>");
     }
 
 
     int sum = 0;
-    for(xml_node argument : arguments.children()){
+    for (xml_node argument : arguments.children()) {
         int value = stoi(argument.child_value());
         sum += value;
     }
@@ -172,11 +165,22 @@ void Server::handleSum(int sd, xml_document &doc) {
 
 int Server::countArguments(xml_node node) {
     int count = 0;
-    for(xml_node arg : node.children()){
+    for (xml_node arg : node.children()) {
         count++;
     }
 
     return count;
+}
+
+void Server::getArguments(int sd, const xml_document &doc, int &a, int &b) {
+    xml_node arguments = doc.document_element().child("operation").child("arguments");
+    if (countArguments(arguments) != 2) {
+        sendResponse(sd, "<response>The operation must have two arguments.</response>");
+    }
+
+    xml_node argument = arguments.child("argument");
+    a = stoi(argument.child_value());
+    b = stoi(argument.next_sibling().child_value());
 }
 
 void Server::handleAdd(int sd, xml_document &doc) {
@@ -187,16 +191,14 @@ void Server::handleAdd(int sd, xml_document &doc) {
     sendResponse(sd, result);
 }
 
-void Server::getArguments(int sd, const xml_document &doc, int &a, int &b) {
-    xml_node arguments = doc.document_element().child("operation").child("arguments");
-    if(countArguments(arguments) != 2){
-        sendResponse(sd, "<response>The operation must have two arguments.</response>");
-    }
-
-    xml_node argument = arguments.child("argument");
-    a= stoi(argument.child_value());
-    b= stoi(argument.next_sibling().child_value());
+void Server::handleSub(int sd, xml_document &doc) {
+    int a;
+    int b;
+    getArguments(sd, doc, a, b);
+    string result = "<response>" + to_string(a - b) + "</response>";
+    sendResponse(sd, result);
 }
+
 
 void Server::handleMul(int sd, xml_document &doc) {
     int a;
@@ -206,19 +208,28 @@ void Server::handleMul(int sd, xml_document &doc) {
     sendResponse(sd, result);
 }
 
-
-
-void Server::handleSub(int sd, xml_document &doc) {
+void Server::handleDiv(int sd, xml_document &doc) {
     int a;
     int b;
     getArguments(sd, doc, a, b);
-    string result = "<response>" + to_string(a - b) + "</response>";
+    string result = "<response>" + to_string(a / b) + "</response>";
     sendResponse(sd, result);
 }
 
-void Server::sendResponse(int sd, string message) {
-    writeInt(sd, message.length());
-    writeBuffer(sd, message.c_str());
+void Server::handleToUppercase(int sd, xml_document &doc) {
+    xml_node arguments = doc.document_element().child("operation").child("arguments");
+    if (countArguments(arguments) != 1) {
+        sendResponse(sd, "<response>The operation must have one argument.</response>");
+    }
+
+    string arg = arguments.child("argument").child_value();
+
+    for (char &c : arg) {
+        c = toupper(c);
+    }
+
+    string result = "<response>" + arg + "</response>";
+    sendResponse(sd, result);
 }
 
 // http://www.cplusplus.com/reference/cstdio/fread/
@@ -257,28 +268,9 @@ void Server::sendFile(int socketDescriptor) {
     free(buffer);
 }
 
-void Server::handleDiv(int sd, xml_document &doc) {
-    int a;
-    int b;
-    getArguments(sd, doc, a, b);
-    string result = "<response>" + to_string(a / b) + "</response>";
-    sendResponse(sd, result);
-}
-
-void Server::handleToUppercase(int sd, xml_document &doc) {
-    xml_node arguments = doc.document_element().child("operation").child("arguments");
-    if(countArguments(arguments) != 1){
-        sendResponse(sd, "<response>The operation must have one argument.</response>");
-    }
-
-    string arg = arguments.child("argument").child_value();
-
-    for(char& c : arg){
-        c = toupper(c);
-    }
-
-    string result = "<response>" + arg + "</response>";
-    sendResponse(sd, result);
+void Server::sendResponse(int sd, string message) {
+    writeInt(sd, message.length());
+    writeBuffer(sd, message.c_str());
 }
 
 

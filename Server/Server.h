@@ -28,20 +28,27 @@ private:
     int port;
 
     void prepareDataStructures();
+
     sockaddr_in &initializeStructure();
+
     void sendFile(int socketDescriptor);
 
 public:
     Server(int port);
 
-    void createSocket();
-    void bindSocket();
-    void listenConnections();
     void startServer();
+
+private:
+
+    void createSocket();
+
+    void bindSocket();
+
+    void listenConnections();
 
     void sendResponse(int sd, string message);
 
-    void handleOperationCall(int sd, xml_document& doc);
+    void handleOperationCall(int sd, xml_document &doc);
 
     void handleAdd(int sd, xml_document &document);
 

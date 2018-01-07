@@ -40,13 +40,6 @@
         <resultType>int</resultType>
     </operation>
     <operation>
-        <name>abs</name>
-        <arguments>
-            <type>int</type>
-        </arguments>
-        <resultType>int</resultType>
-    </operation>
-    <operation>
         <name>to_uppercase</name>
         <arguments>
             <type>string</type>

@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char* argv[]){
 
-    UI* ui = new UI(nullptr);
+    UI* ui = new UI();
     ui->startUserInteraction();
 
     return 0;

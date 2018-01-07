@@ -18,24 +18,23 @@ private:
 
     int socketDescriptor;
     struct sockaddr_in server;
-    char message[100];
 
     void initializeConnectionInfo();
+
     void createSocket();
+
     void connectToServer();
 
 public:
     Client(const char ipAddress[], int port);
+
     ~Client();
+
     string getOperationListFromServer();
-    void readMessageFromTerminal();
-    void sendMessageToServer();
-    string readMessageFromServer();
-    string readBufferFromServer();
-    void printMessage();
+
     string makeOperationRequest(string request);
 
-    string getOperationListResponseFromServer() const;
+    string getOperationListResponseFromServer();
 
     void sendOperationListRequestToServer();
 };
