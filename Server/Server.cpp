@@ -8,14 +8,14 @@
 #include <string.h>
 #include <wait.h>
 #include <iostream>
-
-
+#include <string>
 #include "pugixml/src/pugixml.hpp"
 #include "pugixml/src/pugixml.cpp"
 #include "pugixml/src/pugiconfig.hpp"
 
-
 using namespace pugi;
+
+
 using namespace std;
 
 
@@ -64,12 +64,6 @@ void Server::listenConnections() {
     }
 }
 
-void Server::prepareResponseMessage() {
-    bzero(this->responseMessage, 100);
-    strcat(this->responseMessage, "Hello ");
-    strcat(this->responseMessage, this->receivedMessage);
-}
-
 /* serve clients in a concurrent way*/
 void Server::startServer() {
     while (1) {
@@ -93,10 +87,6 @@ void Server::startServer() {
         }
 
         if (this->pid == 0) {
-            bzero(this->receivedMessage, 100);
-            printf("[server]Waiting the message...\n");
-            fflush(stdout);
-
             int size = readInt(clientSocketDescriptor);
             char *requestBuffer = readBuffer(clientSocketDescriptor, size);
 
@@ -116,10 +106,11 @@ void Server::startServer() {
                 const char *buffer = "The request is not valid. The XML document could not be parsed.";
                 sendResponse(clientSocketDescriptor, buffer);
             } else if (requestType.compare("operationList") == 0) {
+                cout << "operationList called" << endl;
                 sendFile(clientSocketDescriptor);
             } else if (requestType.compare("operationCall") == 0) {
-                // TODO: expand logic
-                sendResponse(clientSocketDescriptor, "<response>2</response>"); // de implementat
+                cout << "operationCall called" << endl;
+                handleOperationCall(clientSocketDescriptor, doc);
             } else {
                 cout << "Received an invalid request: " << request << endl;
                 const char *buffer = "The request is not valid. No such operation.";
@@ -133,8 +124,37 @@ void Server::startServer() {
     }
 }
 
+void Server::handleOperationCall(int sd, xml_document &doc) {
+    cout << "handleOpertionCall" << endl;
+    string name = doc.document_element().child("operation").child("name").child_value();
+
+    cout << name << endl;
+
+    if (name.compare("add") == 0) {
+        handleAdd(sd, doc);
+    } else if (name.compare("sub") == 0) {
+
+    } else if (name.compare("mul") == 0) {
+
+    } else if (name.compare("div") == 0) {
+
+    } else {
+        sendResponse(sd, "<response>The operation is not defined.</response>");
+    }
+}
+
+
+void Server::handleAdd(int sd, xml_document &doc) {
+    xml_node argument = doc.document_element().child("operation").child("arguments").child("argument");
+    int a = stoi(argument.child_value());
+    int b = stoi(argument.next_sibling().child_value());
+
+    string result = "<response>" + to_string(a + b) + "</response>";
+    sendResponse(sd, result);
+}
+
 void Server::sendResponse(int sd, string message) {
-    writeInt(sd, strlen(message.c_str()));
+    writeInt(sd, message.length());
     writeBuffer(sd, message.c_str());
 }
 
@@ -173,6 +193,8 @@ void Server::sendFile(int socketDescriptor) {
     fclose(file);
     free(buffer);
 }
+
+
 
 
 

@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <iostream>
 
 
 int readInt(int socketDescriptor) {
@@ -18,13 +19,6 @@ int readInt(int socketDescriptor) {
     }
 
     return value;
-}
-
-void writeInt(int socketDescriptor, int value){
-    if(write(socketDescriptor, &value, sizeof(value)) == -1){
-        printf("Error at writing integer: %d.\n", value);
-        exit(1);
-    }
 }
 
 char readChar(int socketDescriptor){
@@ -55,6 +49,13 @@ char* readBuffer(int socketDescriptor, int length){
     buffer[length] = '\0';
 
     return buffer;
+}
+
+void writeInt(int socketDescriptor, int value){
+    if(write(socketDescriptor, &value, sizeof(value)) == -1){
+        printf("Error at writing integer: %d.\n", value);
+        exit(1);
+    }
 }
 
 void writeBuffer(int socketDescriptor, const char* buffer){

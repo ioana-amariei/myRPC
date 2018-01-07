@@ -84,7 +84,7 @@ string UI::obtainRequestFromUser() {
     operation.append_child("name").append_child(pugi::node_pcdata).set_value(name.c_str());
     tokens.pop_front();
 
-    xml_node arguments = requestNode.append_child("arguments");
+    xml_node arguments = operation.append_child("arguments");
     for(string& argument : tokens) {
         arguments.append_child("argument").append_child(pugi::node_pcdata).set_value(argument.c_str());
     }

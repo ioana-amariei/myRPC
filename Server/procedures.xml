@@ -9,7 +9,7 @@
         <resultType>int</resultType>
     </operation>
     <operation>
-        <name>substract</name>
+        <name>sub</name>
         <arguments>
             <type>int</type>
             <type>int</type>
@@ -17,7 +17,7 @@
         <resultType>int</resultType>
     </operation>
     <operation>
-        <name>multiply</name>
+        <name>mul</name>
         <arguments>
             <type>int</type>
             <type>int</type>
@@ -25,7 +25,7 @@
         <resultType>int</resultType>
     </operation>
     <operation>
-        <name>divide</name>
+        <name>div</name>
         <arguments>
             <type>int</type>
             <Subtype>int</Subtype>

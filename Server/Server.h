@@ -10,13 +10,18 @@
 #include <string>
 #include "Helpers.h"
 
+#include "pugixml/src/pugixml.hpp"
+//#include "pugixml/src/pugixml.cpp"
+#include "pugixml/src/pugiconfig.hpp"
+
+using namespace pugi;
+using namespace std;
+
 
 class Server {
 private:
     struct sockaddr_in server;
     struct sockaddr_in from;
-    char receivedMessage[100];
-    char responseMessage[100] = " ";
     int status;
     int pid;
     int socketDescriptor;
@@ -24,7 +29,6 @@ private:
 
     void prepareDataStructures();
     sockaddr_in &initializeStructure();
-    void prepareResponseMessage();
     void sendFile(int socketDescriptor);
 
 public:
@@ -36,6 +40,10 @@ public:
     void startServer();
 
     void sendResponse(int sd, string message);
+
+    void handleOperationCall(int sd, xml_document& doc);
+
+    void handleAdd(int sd, xml_document &document);
 };
 
 
