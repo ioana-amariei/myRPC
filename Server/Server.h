@@ -44,6 +44,20 @@ public:
     void handleOperationCall(int sd, xml_document& doc);
 
     void handleAdd(int sd, xml_document &document);
+
+    void handleSum(int sd, xml_document &document);
+
+    int countArguments(xml_node node);
+
+    void handleSub(int sd, xml_document &document);
+
+    void handleMul(int sd, xml_document &document);
+
+    void getArguments(int sd, const xml_document &doc, int &a, int &b);
+
+    void handleDiv(int sd, xml_document &document);
+
+    void handleToUppercase(int sd, xml_document &document);
 };
 
 
