@@ -1,7 +1,9 @@
-//
-// Created by ioana on 05.01.2018.
-//https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/cliTcpIt.c
-//
+/**
+* @author Amariei Ioana
+* @date 05.01.2017
+* @https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/cliTcpIt.c
+*/
+
 
 #include <iostream>
 #include <sys/socket.h>

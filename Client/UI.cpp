@@ -1,12 +1,14 @@
-//
-// Created by ioana on 05.01.2018.
-//
+/**
+* @author Amariei Ioana
+* @date 05.01.2017
+* @https://pugixml.org/docs/quickstart.html#introduction
+*/
+
 #include "UI.h"
 #include "Helpers.h"
 #include <iostream>
 #include <sstream>
 
-// https://pugixml.org/docs/quickstart.html#introduction
 #include "pugixml/src/pugixml.hpp"
 #include "pugixml/src/pugixml.cpp"
 #include "pugixml/src/pugiconfig.hpp"
@@ -21,11 +23,11 @@ UI::UI() {
 
 void UI::startUserInteraction() {
     /*
-     * 1. obtine lista operatii
-     * 2. afisare lista operatii
-     * 3. preluare comanda
-     * 4. trimitere comanda catre client
-     * 5. obtinere rezultat si afisarea lui
+     * 1. obtain the list of procedures
+     * 2. display the list of procedures
+     * 3. obtain request from user
+     * 4. send request to client
+     * 5. obtain result and display it
      */
 
     string operations = newClient().getOperationListFromServer();

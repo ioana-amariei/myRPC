@@ -1,10 +1,7 @@
-//
-// Created by ioana on 05.01.2018.
-//
-
-//
-// Created by ioana on 05.01.2018.
-//
+/**
+* @author Amariei Ioana
+* @date 05.01.2017
+*/
 
 #include "Helpers.h"
 

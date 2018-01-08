@@ -1,0 +1,3 @@
+/home/ioana/facultate/PROIECT-MY-RPC/myRPC/Client/CMakeFiles/rebuild_cache.dir
+/home/ioana/facultate/PROIECT-MY-RPC/myRPC/Client/CMakeFiles/edit_cache.dir
+/home/ioana/facultate/PROIECT-MY-RPC/myRPC/Client/CMakeFiles/Client.dir

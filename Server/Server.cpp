@@ -1,7 +1,8 @@
-//
-// Created by ioana on 05.01.2018.
-//https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/servTcpIt.c
-//
+/**
+* @author Amariei Ioana
+* @date 05.01.2017
+* @https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/servTcpIt.c
+*/
 
 #include "Server.h"
 
@@ -36,15 +37,13 @@ void Server::prepareDataStructures() {
     bzero(&this->from, sizeof(this->from));
 }
 
-sockaddr_in &Server::initializeStructure() {
+void Server::initializeStructure() {
     /* establishing the family of sockets */
     this->server.sin_family = AF_INET;
     /* accept any address */
     this->server.sin_addr.s_addr = htonl(INADDR_ANY);
     /* use a user port */
     this->server.sin_port = htons(port);
-
-    return this->server;
 }
 
 void Server::createSocket() {
@@ -99,7 +98,6 @@ void Server::startServer() {
             xml_parse_result result = doc.load_string(request.c_str());
 
             string requestType = doc.document_element().attribute("type").value();
-            cout << requestType << endl;
 
             if (!result) {
                 cout << "Parsed with errors" << endl;
@@ -107,10 +105,8 @@ void Server::startServer() {
                 const char *buffer = "The request is not valid. The XML document could not be parsed.";
                 sendResponse(clientSocketDescriptor, buffer);
             } else if (requestType.compare("operationList") == 0) {
-                cout << "operationList called" << endl;
                 sendFile(clientSocketDescriptor);
             } else if (requestType.compare("operationCall") == 0) {
-                cout << "operationCall called" << endl;
                 handleOperationCall(clientSocketDescriptor, doc);
             } else {
                 cout << "Received an invalid request: " << request << endl;
@@ -120,7 +116,9 @@ void Server::startServer() {
 
             close(clientSocketDescriptor);
         } else {
-            // https://profs.info.uaic.ro/~eonica/rc/lab07e.html
+            /**
+             * @https://profs.info.uaic.ro/~eonica/rc/lab07e.html
+             */
             waitpid(pid, &this->status, WNOHANG);
         }
     }
@@ -145,7 +143,6 @@ void Server::handleOperationCall(int sd, xml_document &doc) {
         sendResponse(sd, "<response>The operation is not defined.</response>");
     }
 }
-
 
 void Server::handleSum(int sd, xml_document &doc) {
     xml_node arguments = doc.document_element().child("operation").child("arguments");
@@ -235,7 +232,9 @@ void Server::handleToUppercase(int sd, xml_document &doc) {
     sendResponse(sd, result);
 }
 
-// http://www.cplusplus.com/reference/cstdio/fread/
+/**
+ * @http://www.cplusplus.com/reference/cstdio/fread/
+ */
 void Server::sendFile(int socketDescriptor) {
     FILE *file = fopen("/home/ioana/facultate/PROIECT-MY-RPC/myRPC/Server/procedures.xml", "r");
 

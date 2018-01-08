@@ -1,6 +1,7 @@
-//
-// Created by ioana on 05.01.2018.
-//
+/**
+* @author Amariei Ioana
+* @date 05.01.2017
+*/
 
 #ifndef CLIENT_GUI_H
 #define CLIENT_GUI_H
@@ -15,22 +16,45 @@ class Client;
 
 class UI {
 private:
+    /**
+     * client instance
+     */
     Client *client;
 
 public:
     UI();
 
+    /**
+     * Starts the CLI user interaction.
+     */
     void startUserInteraction();
 
 private:
     Client newClient();
 
-    void displayAvailableOperations(string string1);
+    /**
+     * Display available operations.
+     * @param string the list of operations
+     */
+    void displayAvailableOperations(string string);
 
+    /**
+     * Obtain the request from user.
+     * @return the string that contains the request
+     */
     string obtainRequestFromUser();
 
-    void printResult(string basic_string);
+    /**
+     * Print the result.
+     * @param string the result
+     */
+    void printResult(string result);
 
+    /**
+     * Enclose a string between "<>"
+     * @param typeIdentifier the string to be enclosed
+     * @return the string enclosed by "<>"
+     */
     string encloseTypeIdentifier(string typeIdentifier);
 };
 

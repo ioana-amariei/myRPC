@@ -1,3 +1,8 @@
+/**
+* @author Amariei Ioana
+* @date 05.01.2017
+*/
+
 #include <iostream>
 using namespace std;
 

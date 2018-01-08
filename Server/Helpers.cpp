@@ -1,6 +1,7 @@
-//
-// Created by ioana on 05.01.2018.
-//
+/**
+* @author Amariei Ioana
+* @date 05.01.2017
+*/
 
 #include "Helpers.h"
 
@@ -21,12 +22,14 @@ int readInt(int socketDescriptor) {
     return value;
 }
 
+
 void writeInt(int socketDescriptor, int value){
     if(write(socketDescriptor, &value, sizeof(value)) == -1){
         printf("Error at writing integer: %d.\n", value);
         exit(1);
     }
 }
+
 
 char readChar(int socketDescriptor){
     char value = 0;
@@ -38,12 +41,14 @@ char readChar(int socketDescriptor){
     return value;
 }
 
+
 void writeChar(int socketDescriptor, char value){
     if(write(socketDescriptor, &value, sizeof(value)) == -1){
         printf("Error at writing char: %s.\n", value);
         exit(1);
     }
 }
+
 
 char* readBuffer(int socketDescriptor, int length){
     char* buffer = (char*)calloc(length + 1, sizeof(char));
