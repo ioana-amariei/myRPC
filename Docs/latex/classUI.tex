@@ -1,0 +1,119 @@
+\hypertarget{classUI}{}\section{UI Class Reference}
+\label{classUI}\index{UI@{UI}}
+
+
+{\ttfamily \#include $<$U\+I.\+h$>$}
+
+
+
+Collaboration diagram for UI\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classUI_a675985a56b5e87ebdc8e5884b9f2ee09}{UI}} ()
+\item 
+void \mbox{\hyperlink{classUI_a018066cc2c5b54cbd51b1a89a29a1c67}{start\+User\+Interaction}} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classClient}{Client}} \mbox{\hyperlink{classUI_acdfe48d32141de368744ddd75d41d82d}{new\+Client}} ()
+\item 
+void \mbox{\hyperlink{classUI_abf905b724c7da571a7aa7b8e1a61e409}{display\+Available\+Operations}} (string string)
+\item 
+string \mbox{\hyperlink{classUI_a343fa5043d1f649ee433647539a721f0}{obtain\+Request\+From\+User}} ()
+\item 
+void \mbox{\hyperlink{classUI_aad7a4761b32253e43dcb76429deefcd3}{print\+Result}} (string result)
+\item 
+string \mbox{\hyperlink{classUI_a11fde47951c6781036418b9b2dd282ff}{enclose\+Type\+Identifier}} (string type\+Identifier)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classClient}{Client}} $\ast$ \mbox{\hyperlink{classUI_a7bd176ddf21a242e884c010b4dcf756f}{client}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classUI_a675985a56b5e87ebdc8e5884b9f2ee09}\label{classUI_a675985a56b5e87ebdc8e5884b9f2ee09}} 
+\index{UI@{UI}!UI@{UI}}
+\index{UI@{UI}!UI@{UI}}
+\subsubsection{\texorpdfstring{U\+I()}{UI()}}
+{\footnotesize\ttfamily U\+I\+::\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classUI_abf905b724c7da571a7aa7b8e1a61e409}\label{classUI_abf905b724c7da571a7aa7b8e1a61e409}} 
+\index{UI@{UI}!display\+Available\+Operations@{display\+Available\+Operations}}
+\index{display\+Available\+Operations@{display\+Available\+Operations}!UI@{UI}}
+\subsubsection{\texorpdfstring{display\+Available\+Operations()}{displayAvailableOperations()}}
+{\footnotesize\ttfamily void U\+I\+::display\+Available\+Operations (\begin{DoxyParamCaption}\item[{string}]{string }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Display available operations. 
+\begin{DoxyParams}{Parameters}
+{\em string} & the list of operations \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classUI_a11fde47951c6781036418b9b2dd282ff}\label{classUI_a11fde47951c6781036418b9b2dd282ff}} 
+\index{UI@{UI}!enclose\+Type\+Identifier@{enclose\+Type\+Identifier}}
+\index{enclose\+Type\+Identifier@{enclose\+Type\+Identifier}!UI@{UI}}
+\subsubsection{\texorpdfstring{enclose\+Type\+Identifier()}{encloseTypeIdentifier()}}
+{\footnotesize\ttfamily string U\+I\+::enclose\+Type\+Identifier (\begin{DoxyParamCaption}\item[{string}]{type\+Identifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Enclose a string between \char`\"{}$<$$>$\char`\"{} 
+\begin{DoxyParams}{Parameters}
+{\em type\+Identifier} & the string to be enclosed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the string enclosed by \char`\"{}$<$$>$\char`\"{} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classUI_acdfe48d32141de368744ddd75d41d82d}\label{classUI_acdfe48d32141de368744ddd75d41d82d}} 
+\index{UI@{UI}!new\+Client@{new\+Client}}
+\index{new\+Client@{new\+Client}!UI@{UI}}
+\subsubsection{\texorpdfstring{new\+Client()}{newClient()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classClient}{Client}} U\+I\+::new\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classUI_a343fa5043d1f649ee433647539a721f0}\label{classUI_a343fa5043d1f649ee433647539a721f0}} 
+\index{UI@{UI}!obtain\+Request\+From\+User@{obtain\+Request\+From\+User}}
+\index{obtain\+Request\+From\+User@{obtain\+Request\+From\+User}!UI@{UI}}
+\subsubsection{\texorpdfstring{obtain\+Request\+From\+User()}{obtainRequestFromUser()}}
+{\footnotesize\ttfamily string U\+I\+::obtain\+Request\+From\+User (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Obtain the request from user. \begin{DoxyReturn}{Returns}
+the string that contains the request 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classUI_aad7a4761b32253e43dcb76429deefcd3}\label{classUI_aad7a4761b32253e43dcb76429deefcd3}} 
+\index{UI@{UI}!print\+Result@{print\+Result}}
+\index{print\+Result@{print\+Result}!UI@{UI}}
+\subsubsection{\texorpdfstring{print\+Result()}{printResult()}}
+{\footnotesize\ttfamily void U\+I\+::print\+Result (\begin{DoxyParamCaption}\item[{string}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Print the result. 
+\begin{DoxyParams}{Parameters}
+{\em string} & the result \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classUI_a018066cc2c5b54cbd51b1a89a29a1c67}\label{classUI_a018066cc2c5b54cbd51b1a89a29a1c67}} 
+\index{UI@{UI}!start\+User\+Interaction@{start\+User\+Interaction}}
+\index{start\+User\+Interaction@{start\+User\+Interaction}!UI@{UI}}
+\subsubsection{\texorpdfstring{start\+User\+Interaction()}{startUserInteraction()}}
+{\footnotesize\ttfamily void U\+I\+::start\+User\+Interaction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Starts the C\+LI user interaction. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classUI_a7bd176ddf21a242e884c010b4dcf756f}\label{classUI_a7bd176ddf21a242e884c010b4dcf756f}} 
+\index{UI@{UI}!client@{client}}
+\index{client@{client}!UI@{UI}}
+\subsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classClient}{Client}}$\ast$ U\+I\+::client\hspace{0.3cm}{\ttfamily [private]}}
+
+client instance 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Client/\mbox{\hyperlink{UI_8h}{U\+I.\+h}}\item 
+Client/\mbox{\hyperlink{UI_8cpp}{U\+I.\+cpp}}\end{DoxyCompactItemize}

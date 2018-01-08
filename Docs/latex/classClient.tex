@@ -1,0 +1,159 @@
+\hypertarget{classClient}{}\section{Client Class Reference}
+\label{classClient}\index{Client@{Client}}
+
+
+{\ttfamily \#include $<$Client.\+h$>$}
+
+
+
+Collaboration diagram for Client\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classClient_a0c36ffb481052708297b939e8e8987e6}{Client}} (const char ip\+Address\mbox{[}$\,$\mbox{]}, int \mbox{\hyperlink{classClient_aad8864d1362eae7c50e53c0d131b7442}{port}})
+\item 
+\mbox{\hyperlink{classClient_a840e519ca781888cbd54181572ebe3a7}{$\sim$\+Client}} ()
+\item 
+string \mbox{\hyperlink{classClient_af0e814ffbcec066870a0f9d06aab1c80}{get\+Operation\+List\+From\+Server}} ()
+\item 
+string \mbox{\hyperlink{classClient_a4b3fb068e167dae862670c1c71c8bf4f}{make\+Operation\+Request}} (string request)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classClient_a19174bbc66616854e59df496419e97e8}{initialize\+Connection\+Info}} ()
+\item 
+void \mbox{\hyperlink{classClient_a76e843ac6155814b72b5b07d50c0d42e}{create\+Socket}} ()
+\item 
+void \mbox{\hyperlink{classClient_a484b660517d6a610b6733bee7e96cb8c}{connect\+To\+Server}} ()
+\item 
+void \mbox{\hyperlink{classClient_a0ebe2a9ba72088ed1863a6d3eb3729bf}{send\+Operation\+List\+Request\+To\+Server}} ()
+\item 
+string \mbox{\hyperlink{classClient_ad35a8d75c474438e4badb63a203b9b47}{get\+Operation\+List\+Response\+From\+Server}} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string $\ast$ \mbox{\hyperlink{classClient_a0dcc58589f647de09ac3bb9b0c047344}{ip}}
+\item 
+int \mbox{\hyperlink{classClient_aad8864d1362eae7c50e53c0d131b7442}{port}}
+\item 
+int \mbox{\hyperlink{classClient_a9f98046d3d62a69810a59430cd88992e}{socket\+Descriptor}}
+\item 
+struct sockaddr\+\_\+in \mbox{\hyperlink{classClient_a5a642940108c175ea6ce84fa121a0a09}{server}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classClient_a0c36ffb481052708297b939e8e8987e6}\label{classClient_a0c36ffb481052708297b939e8e8987e6}} 
+\index{Client@{Client}!Client@{Client}}
+\index{Client@{Client}!Client@{Client}}
+\subsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily Client\+::\+Client (\begin{DoxyParamCaption}\item[{const char}]{ip\+Address\mbox{[}$\,$\mbox{]},  }\item[{int}]{port }\end{DoxyParamCaption})}
+
+Constructor. 
+\begin{DoxyParams}{Parameters}
+{\em ip\+Address} & the IP address of the host \\
+\hline
+{\em port} & port where the service is offered \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classClient_a840e519ca781888cbd54181572ebe3a7}\label{classClient_a840e519ca781888cbd54181572ebe3a7}} 
+\index{Client@{Client}!````~Client@{$\sim$\+Client}}
+\index{````~Client@{$\sim$\+Client}!Client@{Client}}
+\subsubsection{\texorpdfstring{$\sim$\+Client()}{~Client()}}
+{\footnotesize\ttfamily Client\+::$\sim$\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classClient_a484b660517d6a610b6733bee7e96cb8c}\label{classClient_a484b660517d6a610b6733bee7e96cb8c}} 
+\index{Client@{Client}!connect\+To\+Server@{connect\+To\+Server}}
+\index{connect\+To\+Server@{connect\+To\+Server}!Client@{Client}}
+\subsubsection{\texorpdfstring{connect\+To\+Server()}{connectToServer()}}
+{\footnotesize\ttfamily void Client\+::connect\+To\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Connect to server. \mbox{\Hypertarget{classClient_a76e843ac6155814b72b5b07d50c0d42e}\label{classClient_a76e843ac6155814b72b5b07d50c0d42e}} 
+\index{Client@{Client}!create\+Socket@{create\+Socket}}
+\index{create\+Socket@{create\+Socket}!Client@{Client}}
+\subsubsection{\texorpdfstring{create\+Socket()}{createSocket()}}
+{\footnotesize\ttfamily void Client\+::create\+Socket (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Create socket \mbox{\Hypertarget{classClient_af0e814ffbcec066870a0f9d06aab1c80}\label{classClient_af0e814ffbcec066870a0f9d06aab1c80}} 
+\index{Client@{Client}!get\+Operation\+List\+From\+Server@{get\+Operation\+List\+From\+Server}}
+\index{get\+Operation\+List\+From\+Server@{get\+Operation\+List\+From\+Server}!Client@{Client}}
+\subsubsection{\texorpdfstring{get\+Operation\+List\+From\+Server()}{getOperationListFromServer()}}
+{\footnotesize\ttfamily string Client\+::get\+Operation\+List\+From\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Obtain procedure list from server. \begin{DoxyReturn}{Returns}
+procedure list 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classClient_ad35a8d75c474438e4badb63a203b9b47}\label{classClient_ad35a8d75c474438e4badb63a203b9b47}} 
+\index{Client@{Client}!get\+Operation\+List\+Response\+From\+Server@{get\+Operation\+List\+Response\+From\+Server}}
+\index{get\+Operation\+List\+Response\+From\+Server@{get\+Operation\+List\+Response\+From\+Server}!Client@{Client}}
+\subsubsection{\texorpdfstring{get\+Operation\+List\+Response\+From\+Server()}{getOperationListResponseFromServer()}}
+{\footnotesize\ttfamily string Client\+::get\+Operation\+List\+Response\+From\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Obtain procedure list from server. \begin{DoxyReturn}{Returns}
+procedure list 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classClient_a19174bbc66616854e59df496419e97e8}\label{classClient_a19174bbc66616854e59df496419e97e8}} 
+\index{Client@{Client}!initialize\+Connection\+Info@{initialize\+Connection\+Info}}
+\index{initialize\+Connection\+Info@{initialize\+Connection\+Info}!Client@{Client}}
+\subsubsection{\texorpdfstring{initialize\+Connection\+Info()}{initializeConnectionInfo()}}
+{\footnotesize\ttfamily void Client\+::initialize\+Connection\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Fill the structure used by the server. \mbox{\Hypertarget{classClient_a4b3fb068e167dae862670c1c71c8bf4f}\label{classClient_a4b3fb068e167dae862670c1c71c8bf4f}} 
+\index{Client@{Client}!make\+Operation\+Request@{make\+Operation\+Request}}
+\index{make\+Operation\+Request@{make\+Operation\+Request}!Client@{Client}}
+\subsubsection{\texorpdfstring{make\+Operation\+Request()}{makeOperationRequest()}}
+{\footnotesize\ttfamily string Client\+::make\+Operation\+Request (\begin{DoxyParamCaption}\item[{string}]{request }\end{DoxyParamCaption})}
+
+Make operation request. 
+\begin{DoxyParams}{Parameters}
+{\em request} & user request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string containing the result of the operation 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classClient_a0ebe2a9ba72088ed1863a6d3eb3729bf}\label{classClient_a0ebe2a9ba72088ed1863a6d3eb3729bf}} 
+\index{Client@{Client}!send\+Operation\+List\+Request\+To\+Server@{send\+Operation\+List\+Request\+To\+Server}}
+\index{send\+Operation\+List\+Request\+To\+Server@{send\+Operation\+List\+Request\+To\+Server}!Client@{Client}}
+\subsubsection{\texorpdfstring{send\+Operation\+List\+Request\+To\+Server()}{sendOperationListRequestToServer()}}
+{\footnotesize\ttfamily void Client\+::send\+Operation\+List\+Request\+To\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Send procedure list request to server. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classClient_a0dcc58589f647de09ac3bb9b0c047344}\label{classClient_a0dcc58589f647de09ac3bb9b0c047344}} 
+\index{Client@{Client}!ip@{ip}}
+\index{ip@{ip}!Client@{Client}}
+\subsubsection{\texorpdfstring{ip}{ip}}
+{\footnotesize\ttfamily string$\ast$ Client\+::ip\hspace{0.3cm}{\ttfamily [private]}}
+
+IP address of the server \mbox{\Hypertarget{classClient_aad8864d1362eae7c50e53c0d131b7442}\label{classClient_aad8864d1362eae7c50e53c0d131b7442}} 
+\index{Client@{Client}!port@{port}}
+\index{port@{port}!Client@{Client}}
+\subsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily int Client\+::port\hspace{0.3cm}{\ttfamily [private]}}
+
+server login port \mbox{\Hypertarget{classClient_a5a642940108c175ea6ce84fa121a0a09}\label{classClient_a5a642940108c175ea6ce84fa121a0a09}} 
+\index{Client@{Client}!server@{server}}
+\index{server@{server}!Client@{Client}}
+\subsubsection{\texorpdfstring{server}{server}}
+{\footnotesize\ttfamily struct sockaddr\+\_\+in Client\+::server\hspace{0.3cm}{\ttfamily [private]}}
+
+the structure used to connect \mbox{\Hypertarget{classClient_a9f98046d3d62a69810a59430cd88992e}\label{classClient_a9f98046d3d62a69810a59430cd88992e}} 
+\index{Client@{Client}!socket\+Descriptor@{socket\+Descriptor}}
+\index{socket\+Descriptor@{socket\+Descriptor}!Client@{Client}}
+\subsubsection{\texorpdfstring{socket\+Descriptor}{socketDescriptor}}
+{\footnotesize\ttfamily int Client\+::socket\+Descriptor\hspace{0.3cm}{\ttfamily [private]}}
+
+the socket descriptor 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Client/\mbox{\hyperlink{Client_8h}{Client.\+h}}\item 
+Client/\mbox{\hyperlink{Client_8cpp}{Client.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,311 @@
+\hypertarget{classServer}{}\section{Server Class Reference}
+\label{classServer}\index{Server@{Server}}
+
+
+{\ttfamily \#include $<$Server.\+h$>$}
+
+
+
+Collaboration diagram for Server\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classServer_a7d1fe6ba5f0fe9190a4f039662ea0e85}{Server}} (int \mbox{\hyperlink{classServer_a926c9dae229a62b6d33fdbb41dca6d82}{port}})
+\item 
+void \mbox{\hyperlink{classServer_af59bb3a96b3311ed2b87e2d6899d9f79}{start\+Server}} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classServer_a5a4cae5c2975f4f9a655b766f10628dd}{prepare\+Data\+Structures}} ()
+\item 
+void \mbox{\hyperlink{classServer_abeb8bfed07ed024654d2ca797d99df01}{initialize\+Structure}} ()
+\item 
+void \mbox{\hyperlink{classServer_af8e4dc8d1a4eff9b99165513e5123d8a}{send\+File}} (int \mbox{\hyperlink{classServer_a5e52b598760882795a7ea0aada7cb9b7}{socket\+Descriptor}})
+\item 
+void \mbox{\hyperlink{classServer_afa110e18047a3345bca72ed32ca3ce95}{create\+Socket}} ()
+\item 
+void \mbox{\hyperlink{classServer_a8d86edf1df9f12df07dc6e949d70f77f}{bind\+Socket}} ()
+\item 
+void \mbox{\hyperlink{classServer_adf63a3e3f481ef8492642ea8746c471b}{listen\+Connections}} ()
+\item 
+void \mbox{\hyperlink{classServer_a925825ad85f2ee6695d46d479e1a9511}{send\+Response}} (int sd, string message)
+\item 
+void \mbox{\hyperlink{classServer_ac7681c928d92fa6348356cb7427c3903}{handle\+Operation\+Call}} (int sd, xml\+\_\+document \&document)
+\item 
+void \mbox{\hyperlink{classServer_a51dd9dc7af2e1ec3e09567360b561697}{handle\+Add}} (int sd, xml\+\_\+document \&document)
+\item 
+void \mbox{\hyperlink{classServer_abff887eb6a2fc64117b862296a57639d}{handle\+Sum}} (int sd, xml\+\_\+document \&document)
+\item 
+void \mbox{\hyperlink{classServer_a583c0b2491e947f2612648dafaf55b70}{handle\+Sub}} (int sd, xml\+\_\+document \&document)
+\item 
+void \mbox{\hyperlink{classServer_aea8043ace02861260e3cc5b9f2cb5e67}{handle\+Mul}} (int sd, xml\+\_\+document \&document)
+\item 
+void \mbox{\hyperlink{classServer_ae87e0ec97ca193371d707289ecb9492d}{handle\+Div}} (int sd, xml\+\_\+document \&document)
+\item 
+void \mbox{\hyperlink{classServer_aab98c23345a6c6e19d6f0d723b2261c0}{handle\+To\+Uppercase}} (int sd, xml\+\_\+document \&document)
+\item 
+int \mbox{\hyperlink{classServer_ad5472ee30f2eb795c29432d3cc7dac15}{count\+Arguments}} (xml\+\_\+node node)
+\item 
+void \mbox{\hyperlink{classServer_ab841af239c77eeb2ec47e7893d51dfe0}{get\+Arguments}} (int sd, const xml\+\_\+document \&document, int \&a, int \&b)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+struct sockaddr\+\_\+in \mbox{\hyperlink{classServer_af10e93ccde1ccedd999726519b628f68}{server}}
+\item 
+struct sockaddr\+\_\+in \mbox{\hyperlink{classServer_a630123b8292df5f3947d82027ec7991b}{from}}
+\item 
+int \mbox{\hyperlink{classServer_a4073381c056bef47db16d0472c4b31a9}{status}}
+\item 
+int \mbox{\hyperlink{classServer_a519ae955c6db43f4b832626b8d7518a7}{pid}}
+\item 
+int \mbox{\hyperlink{classServer_a5e52b598760882795a7ea0aada7cb9b7}{socket\+Descriptor}}
+\item 
+int \mbox{\hyperlink{classServer_a926c9dae229a62b6d33fdbb41dca6d82}{port}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classServer_a7d1fe6ba5f0fe9190a4f039662ea0e85}\label{classServer_a7d1fe6ba5f0fe9190a4f039662ea0e85}} 
+\index{Server@{Server}!Server@{Server}}
+\index{Server@{Server}!Server@{Server}}
+\subsubsection{\texorpdfstring{Server()}{Server()}}
+{\footnotesize\ttfamily Server\+::\+Server (\begin{DoxyParamCaption}\item[{int}]{port }\end{DoxyParamCaption})}
+
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em port} & used port \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classServer_a8d86edf1df9f12df07dc6e949d70f77f}\label{classServer_a8d86edf1df9f12df07dc6e949d70f77f}} 
+\index{Server@{Server}!bind\+Socket@{bind\+Socket}}
+\index{bind\+Socket@{bind\+Socket}!Server@{Server}}
+\subsubsection{\texorpdfstring{bind\+Socket()}{bindSocket()}}
+{\footnotesize\ttfamily void Server\+::bind\+Socket (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Attach the socket. \mbox{\Hypertarget{classServer_ad5472ee30f2eb795c29432d3cc7dac15}\label{classServer_ad5472ee30f2eb795c29432d3cc7dac15}} 
+\index{Server@{Server}!count\+Arguments@{count\+Arguments}}
+\index{count\+Arguments@{count\+Arguments}!Server@{Server}}
+\subsubsection{\texorpdfstring{count\+Arguments()}{countArguments()}}
+{\footnotesize\ttfamily int Server\+::count\+Arguments (\begin{DoxyParamCaption}\item[{xml\+\_\+node}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Count number of arguments. 
+\begin{DoxyParams}{Parameters}
+{\em node} & xml\+\_\+node for arguments in the xml document \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of arguments 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classServer_afa110e18047a3345bca72ed32ca3ce95}\label{classServer_afa110e18047a3345bca72ed32ca3ce95}} 
+\index{Server@{Server}!create\+Socket@{create\+Socket}}
+\index{create\+Socket@{create\+Socket}!Server@{Server}}
+\subsubsection{\texorpdfstring{create\+Socket()}{createSocket()}}
+{\footnotesize\ttfamily void Server\+::create\+Socket (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Create socket. \mbox{\Hypertarget{classServer_ab841af239c77eeb2ec47e7893d51dfe0}\label{classServer_ab841af239c77eeb2ec47e7893d51dfe0}} 
+\index{Server@{Server}!get\+Arguments@{get\+Arguments}}
+\index{get\+Arguments@{get\+Arguments}!Server@{Server}}
+\subsubsection{\texorpdfstring{get\+Arguments()}{getArguments()}}
+{\footnotesize\ttfamily void Server\+::get\+Arguments (\begin{DoxyParamCaption}\item[{int}]{sd,  }\item[{const xml\+\_\+document \&}]{document,  }\item[{int \&}]{a,  }\item[{int \&}]{b }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Obtain arguments. 
+\begin{DoxyParams}{Parameters}
+{\em sd} & the socket descriptor \\
+\hline
+{\em document} & the xml document used to obtain the arguments \\
+\hline
+{\em a} & first argument \\
+\hline
+{\em b} & second argument \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classServer_a51dd9dc7af2e1ec3e09567360b561697}\label{classServer_a51dd9dc7af2e1ec3e09567360b561697}} 
+\index{Server@{Server}!handle\+Add@{handle\+Add}}
+\index{handle\+Add@{handle\+Add}!Server@{Server}}
+\subsubsection{\texorpdfstring{handle\+Add()}{handleAdd()}}
+{\footnotesize\ttfamily void Server\+::handle\+Add (\begin{DoxyParamCaption}\item[{int}]{sd,  }\item[{xml\+\_\+document \&}]{document }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Handle add operation. 
+\begin{DoxyParams}{Parameters}
+{\em sd} & the socket descriptor \\
+\hline
+{\em document} & the xml document send by client \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classServer_ae87e0ec97ca193371d707289ecb9492d}\label{classServer_ae87e0ec97ca193371d707289ecb9492d}} 
+\index{Server@{Server}!handle\+Div@{handle\+Div}}
+\index{handle\+Div@{handle\+Div}!Server@{Server}}
+\subsubsection{\texorpdfstring{handle\+Div()}{handleDiv()}}
+{\footnotesize\ttfamily void Server\+::handle\+Div (\begin{DoxyParamCaption}\item[{int}]{sd,  }\item[{xml\+\_\+document \&}]{document }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Handle divide operation. 
+\begin{DoxyParams}{Parameters}
+{\em sd} & the socket descriptor \\
+\hline
+{\em document} & the xml document send by client \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classServer_aea8043ace02861260e3cc5b9f2cb5e67}\label{classServer_aea8043ace02861260e3cc5b9f2cb5e67}} 
+\index{Server@{Server}!handle\+Mul@{handle\+Mul}}
+\index{handle\+Mul@{handle\+Mul}!Server@{Server}}
+\subsubsection{\texorpdfstring{handle\+Mul()}{handleMul()}}
+{\footnotesize\ttfamily void Server\+::handle\+Mul (\begin{DoxyParamCaption}\item[{int}]{sd,  }\item[{xml\+\_\+document \&}]{document }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Handle multiply operation. 
+\begin{DoxyParams}{Parameters}
+{\em sd} & the socket descriptor \\
+\hline
+{\em document} & the xml document send by client \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classServer_ac7681c928d92fa6348356cb7427c3903}\label{classServer_ac7681c928d92fa6348356cb7427c3903}} 
+\index{Server@{Server}!handle\+Operation\+Call@{handle\+Operation\+Call}}
+\index{handle\+Operation\+Call@{handle\+Operation\+Call}!Server@{Server}}
+\subsubsection{\texorpdfstring{handle\+Operation\+Call()}{handleOperationCall()}}
+{\footnotesize\ttfamily void Server\+::handle\+Operation\+Call (\begin{DoxyParamCaption}\item[{int}]{sd,  }\item[{xml\+\_\+document \&}]{document }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Handle the operation call. 
+\begin{DoxyParams}{Parameters}
+{\em sd} & the socket descriptor \\
+\hline
+{\em doc} & xml document send by client \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classServer_a583c0b2491e947f2612648dafaf55b70}\label{classServer_a583c0b2491e947f2612648dafaf55b70}} 
+\index{Server@{Server}!handle\+Sub@{handle\+Sub}}
+\index{handle\+Sub@{handle\+Sub}!Server@{Server}}
+\subsubsection{\texorpdfstring{handle\+Sub()}{handleSub()}}
+{\footnotesize\ttfamily void Server\+::handle\+Sub (\begin{DoxyParamCaption}\item[{int}]{sd,  }\item[{xml\+\_\+document \&}]{document }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Handle substract operation. 
+\begin{DoxyParams}{Parameters}
+{\em sd} & the socket descriptor \\
+\hline
+{\em document} & the xml document send by client \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classServer_abff887eb6a2fc64117b862296a57639d}\label{classServer_abff887eb6a2fc64117b862296a57639d}} 
+\index{Server@{Server}!handle\+Sum@{handle\+Sum}}
+\index{handle\+Sum@{handle\+Sum}!Server@{Server}}
+\subsubsection{\texorpdfstring{handle\+Sum()}{handleSum()}}
+{\footnotesize\ttfamily void Server\+::handle\+Sum (\begin{DoxyParamCaption}\item[{int}]{sd,  }\item[{xml\+\_\+document \&}]{document }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Handle sum operation. 
+\begin{DoxyParams}{Parameters}
+{\em sd} & the socket descriptor \\
+\hline
+{\em document} & the xml document send by client \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classServer_aab98c23345a6c6e19d6f0d723b2261c0}\label{classServer_aab98c23345a6c6e19d6f0d723b2261c0}} 
+\index{Server@{Server}!handle\+To\+Uppercase@{handle\+To\+Uppercase}}
+\index{handle\+To\+Uppercase@{handle\+To\+Uppercase}!Server@{Server}}
+\subsubsection{\texorpdfstring{handle\+To\+Uppercase()}{handleToUppercase()}}
+{\footnotesize\ttfamily void Server\+::handle\+To\+Uppercase (\begin{DoxyParamCaption}\item[{int}]{sd,  }\item[{xml\+\_\+document \&}]{document }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Handle to\+\_\+uppercase operation. 
+\begin{DoxyParams}{Parameters}
+{\em sd} & the socket descriptor \\
+\hline
+{\em document} & the xml document send by client \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classServer_abeb8bfed07ed024654d2ca797d99df01}\label{classServer_abeb8bfed07ed024654d2ca797d99df01}} 
+\index{Server@{Server}!initialize\+Structure@{initialize\+Structure}}
+\index{initialize\+Structure@{initialize\+Structure}!Server@{Server}}
+\subsubsection{\texorpdfstring{initialize\+Structure()}{initializeStructure()}}
+{\footnotesize\ttfamily void Server\+::initialize\+Structure (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Fill the structure used by the server. \mbox{\Hypertarget{classServer_adf63a3e3f481ef8492642ea8746c471b}\label{classServer_adf63a3e3f481ef8492642ea8746c471b}} 
+\index{Server@{Server}!listen\+Connections@{listen\+Connections}}
+\index{listen\+Connections@{listen\+Connections}!Server@{Server}}
+\subsubsection{\texorpdfstring{listen\+Connections()}{listenConnections()}}
+{\footnotesize\ttfamily void Server\+::listen\+Connections (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Listen to connections. \mbox{\Hypertarget{classServer_a5a4cae5c2975f4f9a655b766f10628dd}\label{classServer_a5a4cae5c2975f4f9a655b766f10628dd}} 
+\index{Server@{Server}!prepare\+Data\+Structures@{prepare\+Data\+Structures}}
+\index{prepare\+Data\+Structures@{prepare\+Data\+Structures}!Server@{Server}}
+\subsubsection{\texorpdfstring{prepare\+Data\+Structures()}{prepareDataStructures()}}
+{\footnotesize\ttfamily void Server\+::prepare\+Data\+Structures (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Prepare data structures. \mbox{\Hypertarget{classServer_af8e4dc8d1a4eff9b99165513e5123d8a}\label{classServer_af8e4dc8d1a4eff9b99165513e5123d8a}} 
+\index{Server@{Server}!send\+File@{send\+File}}
+\index{send\+File@{send\+File}!Server@{Server}}
+\subsubsection{\texorpdfstring{send\+File()}{sendFile()}}
+{\footnotesize\ttfamily void Server\+::send\+File (\begin{DoxyParamCaption}\item[{int}]{socket\+Descriptor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Fill the structure used by the server. 
+\begin{DoxyParams}{Parameters}
+{\em socket\+Descriptor} & socket descriptor\\
+\hline
+\end{DoxyParams}
+\+://www.cplusplus.\+com/reference/cstdio/fread/ \mbox{\Hypertarget{classServer_a925825ad85f2ee6695d46d479e1a9511}\label{classServer_a925825ad85f2ee6695d46d479e1a9511}} 
+\index{Server@{Server}!send\+Response@{send\+Response}}
+\index{send\+Response@{send\+Response}!Server@{Server}}
+\subsubsection{\texorpdfstring{send\+Response()}{sendResponse()}}
+{\footnotesize\ttfamily void Server\+::send\+Response (\begin{DoxyParamCaption}\item[{int}]{sd,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Send response to client. 
+\begin{DoxyParams}{Parameters}
+{\em sd} & the socket descriptor \\
+\hline
+{\em message} & the message to be sent \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classServer_af59bb3a96b3311ed2b87e2d6899d9f79}\label{classServer_af59bb3a96b3311ed2b87e2d6899d9f79}} 
+\index{Server@{Server}!start\+Server@{start\+Server}}
+\index{start\+Server@{start\+Server}!Server@{Server}}
+\subsubsection{\texorpdfstring{start\+Server()}{startServer()}}
+{\footnotesize\ttfamily void Server\+::start\+Server (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Start server. \+://profs.info.\+uaic.\+ro/$\sim$eonica/rc/lab07e.html
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classServer_a630123b8292df5f3947d82027ec7991b}\label{classServer_a630123b8292df5f3947d82027ec7991b}} 
+\index{Server@{Server}!from@{from}}
+\index{from@{from}!Server@{Server}}
+\subsubsection{\texorpdfstring{from}{from}}
+{\footnotesize\ttfamily struct sockaddr\+\_\+in Server\+::from\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classServer_a519ae955c6db43f4b832626b8d7518a7}\label{classServer_a519ae955c6db43f4b832626b8d7518a7}} 
+\index{Server@{Server}!pid@{pid}}
+\index{pid@{pid}!Server@{Server}}
+\subsubsection{\texorpdfstring{pid}{pid}}
+{\footnotesize\ttfamily int Server\+::pid\hspace{0.3cm}{\ttfamily [private]}}
+
+process id \mbox{\Hypertarget{classServer_a926c9dae229a62b6d33fdbb41dca6d82}\label{classServer_a926c9dae229a62b6d33fdbb41dca6d82}} 
+\index{Server@{Server}!port@{port}}
+\index{port@{port}!Server@{Server}}
+\subsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily int Server\+::port\hspace{0.3cm}{\ttfamily [private]}}
+
+port used \mbox{\Hypertarget{classServer_af10e93ccde1ccedd999726519b628f68}\label{classServer_af10e93ccde1ccedd999726519b628f68}} 
+\index{Server@{Server}!server@{server}}
+\index{server@{server}!Server@{Server}}
+\subsubsection{\texorpdfstring{server}{server}}
+{\footnotesize\ttfamily struct sockaddr\+\_\+in Server\+::server\hspace{0.3cm}{\ttfamily [private]}}
+
+the structure used by server \mbox{\Hypertarget{classServer_a5e52b598760882795a7ea0aada7cb9b7}\label{classServer_a5e52b598760882795a7ea0aada7cb9b7}} 
+\index{Server@{Server}!socket\+Descriptor@{socket\+Descriptor}}
+\index{socket\+Descriptor@{socket\+Descriptor}!Server@{Server}}
+\subsubsection{\texorpdfstring{socket\+Descriptor}{socketDescriptor}}
+{\footnotesize\ttfamily int Server\+::socket\+Descriptor\hspace{0.3cm}{\ttfamily [private]}}
+
+socket descriptor \mbox{\Hypertarget{classServer_a4073381c056bef47db16d0472c4b31a9}\label{classServer_a4073381c056bef47db16d0472c4b31a9}} 
+\index{Server@{Server}!status@{status}}
+\index{status@{status}!Server@{Server}}
+\subsubsection{\texorpdfstring{status}{status}}
+{\footnotesize\ttfamily int Server\+::status\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Server/\mbox{\hyperlink{Server_8h}{Server.\+h}}\item 
+Server/\mbox{\hyperlink{Server_8cpp}{Server.\+cpp}}\end{DoxyCompactItemize}
