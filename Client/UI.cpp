@@ -6,7 +6,7 @@
 #include <iostream>
 #include <sstream>
 
-
+// https://pugixml.org/docs/quickstart.html#introduction
 #include "pugixml/src/pugixml.hpp"
 #include "pugixml/src/pugixml.cpp"
 #include "pugixml/src/pugiconfig.hpp"
@@ -44,7 +44,7 @@ void UI::displayAvailableOperations(string ops) {
     xml_parse_result result = doc.load_string(ops.c_str());
 
     if (!result) {
-        cout << "parsed with errors" << endl;
+        cout << "Parsed with errors." << endl;
         cout << result.description() << endl;
         exit(1);
     }
@@ -68,6 +68,7 @@ string UI::encloseTypeIdentifier(string typeIdentifier) {
     return "<" + typeIdentifier + ">";
 }
 
+// PCADATA:to designate mixed content XML elements.
 string UI::obtainRequestFromUser() {
     cout << "Call desired function: ";
     char request[256];
@@ -99,7 +100,7 @@ void UI::printResult(string result) {
     xml_parse_result parse_result = doc.load_string(result.c_str());
 
     if (!parse_result) {
-        cout << "parsed with errors" << endl;
+        cout << "Parsed with errors." << endl;
         cout << parse_result.description() << endl;
         exit(1);
     }

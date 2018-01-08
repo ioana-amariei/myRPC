@@ -29,7 +29,7 @@ int readInt(int socketDescriptor) {
 
 void writeInt(int socketDescriptor, int value){
     if(write(socketDescriptor, &value, sizeof(value)) == -1){
-        printf("Error at writing an integer! \n");
+        printf("Error at writing integer: %d.\n", value);
         exit(1);
     }
 }
@@ -37,7 +37,7 @@ void writeInt(int socketDescriptor, int value){
 char readChar(int socketDescriptor){
     char value = 0;
     if(read(socketDescriptor, &value, sizeof(value)) == -1){
-        printf("Error at reading an integer! \n");
+        printf("Error at reading a char! \n");
         exit(1);
     }
 
@@ -46,7 +46,7 @@ char readChar(int socketDescriptor){
 
 void writeChar(int socketDescriptor, char value){
     if(write(socketDescriptor, &value, sizeof(value)) == -1){
-        printf("Error at writing an integer! \n");
+        printf("Error at writing char: %s.\n", value);
         exit(1);
     }
 }
@@ -67,7 +67,7 @@ char* readBuffer(int socketDescriptor, int length){
 void writeBuffer(int socketDescriptor, const char* buffer){
     int length = strlen(buffer);
     if(write(socketDescriptor, buffer, length) == -1){
-        printf("Error at writing a string! \n");
+        printf("Error at writing string: %d.\n", buffer);
         exit(1);
     }
 }
@@ -76,22 +76,10 @@ void writeBuffer(int socketDescriptor, string buffer){
     writeBuffer(socketDescriptor, buffer.c_str());
 }
 
-bool contains(char* delimiters, char c){
-    int size = strlen(delimiters);
-    for(int i = 0; i< size;i++){
-        if(c == delimiters[i]){
-            return true;
-        }
-    }
-
-    return false;
-}
-
-
 // http://www.cplusplus.com/reference/cstring/strtok/
 list<string> split(char *str, char* delimiters) {
     list<string> tokens;
-    int i = 0;
+
     char *token = NULL;
 
     token = strtok(str, delimiters);

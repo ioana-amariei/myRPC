@@ -25,7 +25,12 @@ private:
 
     void connectToServer();
 
+    void sendOperationListRequestToServer();
+
+    string getOperationListResponseFromServer();
+
 public:
+
     Client(const char ipAddress[], int port);
 
     ~Client();
@@ -33,10 +38,6 @@ public:
     string getOperationListFromServer();
 
     string makeOperationRequest(string request);
-
-    string getOperationListResponseFromServer();
-
-    void sendOperationListRequestToServer();
 };
 
 

@@ -23,6 +23,8 @@ public:
     void startUserInteraction();
 
 private:
+    Client newClient();
+
     void displayAvailableOperations(string string1);
 
     string obtainRequestFromUser();
@@ -30,8 +32,6 @@ private:
     void printResult(string basic_string);
 
     string encloseTypeIdentifier(string typeIdentifier);
-
-    Client newClient();
 };
 
 

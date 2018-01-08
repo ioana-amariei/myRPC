@@ -1,5 +1,6 @@
 //
 // Created by ioana on 05.01.2018.
+//https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/servTcpIt.c
 //
 
 #include "Server.h"
@@ -9,6 +10,8 @@
 #include <wait.h>
 #include <iostream>
 #include <string>
+
+// https://pugixml.org/docs/quickstart.html#introduction
 #include "pugixml/src/pugixml.hpp"
 #include "pugixml/src/pugixml.cpp"
 #include "pugixml/src/pugiconfig.hpp"

@@ -21,10 +21,17 @@ int readInt(int socketDescriptor) {
     return value;
 }
 
+void writeInt(int socketDescriptor, int value){
+    if(write(socketDescriptor, &value, sizeof(value)) == -1){
+        printf("Error at writing integer: %d.\n", value);
+        exit(1);
+    }
+}
+
 char readChar(int socketDescriptor){
     char value = 0;
     if(read(socketDescriptor, &value, sizeof(value)) == -1){
-        printf("Error at reading an integer! \n");
+        printf("Error at reading a char! \n");
         exit(1);
     }
 
@@ -33,7 +40,7 @@ char readChar(int socketDescriptor){
 
 void writeChar(int socketDescriptor, char value){
     if(write(socketDescriptor, &value, sizeof(value)) == -1){
-        printf("Error at writing an integer! \n");
+        printf("Error at writing char: %s.\n", value);
         exit(1);
     }
 }
@@ -51,17 +58,10 @@ char* readBuffer(int socketDescriptor, int length){
     return buffer;
 }
 
-void writeInt(int socketDescriptor, int value){
-    if(write(socketDescriptor, &value, sizeof(value)) == -1){
-        printf("Error at writing integer: %d.\n", value);
-        exit(1);
-    }
-}
-
 void writeBuffer(int socketDescriptor, const char* buffer){
     long length = strlen(buffer);
     if(write(socketDescriptor, buffer, length) == -1){
-        printf("Error at writing a string! \n");
+        printf("Error at writing string: %s.\n", buffer);
         exit(1);
     }
 }
