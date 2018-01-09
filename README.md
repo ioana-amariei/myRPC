@@ -1,23 +1,25 @@
 # myRPC
 
-## Libraries
+### Libraries
 ![pugixml](https://pugixml.org/docs/quickstart.html#install)
 
-## Compile
+### Compile
 Client ![makefile](https://github.com/ioanabirsan/myRPC/blob/master/Client/CMakeFiles/Makefile2)
 
-## How to use
+### How to use
 1. start Server
 2. start Client
 3. make operation request in terminal
 
-## Bibliography
+### Bibliography
 
-![https://profs.info.uaic.ro/~computernetworks/cursullaboratorul.php](https://profs.info.uaic.ro/~computernetworks/cursullaboratorul.php).
+![https://profs.info.uaic.ro/~computernetworks/cursullaboratorul.php](https://profs.info.uaic.ro/~computernetworks/cursullaboratorul.php)
 
-![https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/servTcpIt.c](https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/servTcpIt.c).
+![https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/servTcpIt.c](https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/servTcpIt.c)
 
-![https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/cliTcpIt.c](https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/cliTcpIt.c).
+![https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/cliTcpIt.c](https://profs.info.uaic.ro/~computernetworks/files/NetEx/S5/cliTcpIt.c)
+
+![http://www.cplusplus.com/reference/cstdio/fread/](http://www.cplusplus.com/reference/cstdio/fread/)
 
 ![http://csapp.cs.cmu.edu/2e/ch12-preview.pdf](http://csapp.cs.cmu.edu/2e/ch12-preview.pdf).
 
