@@ -1,5 +1,8 @@
 # myRPC
 
+### Description
+MyRPC project implements a client / server application that allows remote procedures to be called. The server contains a list of predefined procedures, the client being able to get this list and send requests to the server. A protocol for making requests and providing answers was defined.
+
 ### Libraries
 ![pugixml](https://pugixml.org/docs/quickstart.html#install)
 
