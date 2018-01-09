@@ -85,6 +85,10 @@ Client.h
 /home/ioana/facultate/PROIECT-MY-RPC/myRPC/Client/Client.h
 UI.h
 /home/ioana/facultate/PROIECT-MY-RPC/myRPC/Client/UI.h
+list
+-
+sstream
+-
 
 /home/ioana/facultate/PROIECT-MY-RPC/myRPC/Client/pugixml/src/pugiconfig.hpp
 

@@ -1,0 +1,4 @@
+/home/ioana/facultate/programs/clion-2017.2.2/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE= -G "CodeBlocks - Unix Makefiles" /home/ioana/facultate/PROIECT-MY-RPC/myRPC/Server
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ioana/facultate/PROIECT-MY-RPC/myRPC/Server

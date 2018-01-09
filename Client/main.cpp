@@ -4,15 +4,17 @@
 */
 
 #include <iostream>
+#include "Client.h"
+
 using namespace std;
 
-#include "Client.h"
-#include "UI.h"
+string add(int i, int i1);
 
 int main(int argc, char* argv[]){
 
     UI* ui = new UI();
     ui->startUserInteraction();
+
 
     return 0;
 }
