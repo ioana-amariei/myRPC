@@ -7,20 +7,21 @@ MyRPC project implements a client / server application that allows remote proced
 ![pugixml](https://pugixml.org/docs/quickstart.html#install)
 
 ### Compile
-1. download Server executable from ![here](https://github.com/ioanabirsan/myRPC/blob/master/Server/cmake-build-debug/Server)
-2. download Client executable from ![here](https://github.com/ioanabirsan/myRPC/blob/master/Client/cmake-build-debug/Client)
+
+In terminal run command: cmake .
+CMake 3.8 or higher is required. 
 
 ### How to use
 1. start Server in terminal using command: ./Server
 2. start Client in a separate terminal window using command: ./Client
 3. in the terminal for Client make request for an operation from the next list:
 The list of available operations: 
-1. add <int> <int> 
-2. sub <int> <int> 
-3. mul <int> <int> 
-4. div <int> <int> 
+1. add \<int\> \<int\> 
+2. sub \<int\> \<int\> 
+3. mul \<int\> \<int\> 
+4. div \<int\> \<int\> 
 5. sum <int+> 
-6. to_uppercase <string> 
+6. to_uppercase \<string\> 
 
 ### Bibliography
 
