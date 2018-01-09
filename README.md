@@ -4,8 +4,12 @@
 ![pugixml](https://pugixml.org/docs/quickstart.html#install)
 
 ## Compile
+Client ![makefile](https://github.com/ioanabirsan/myRPC/blob/master/Client/CMakeFiles/Makefile2)
 
 ## How to use
+1. start Server
+2. start Client
+3. make operation request in terminal
 
 ## Bibliography
 
