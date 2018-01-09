@@ -86,12 +86,12 @@ private:
     void createSocket();
 
     /**
-     * Attach the socket.
+     * Associate the socket with an address.
      */
     void bindSocket();
 
     /**
-     * Listen to connections.
+     * Passive waiting of connections.
      */
     void listenConnections();
 

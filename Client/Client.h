@@ -43,7 +43,7 @@ private:
     void createSocket();
 
     /**
-     * Connect to server.
+     * Initiating the connection to the server.
      */
     void connectToServer();
 
