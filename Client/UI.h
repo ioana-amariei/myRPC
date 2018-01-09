@@ -33,8 +33,8 @@ private:
     Client newClient();
 
     /**
-     * Display available operations.
-     * @param string the list of operations
+     * Display available procedures.
+     * @param string the list of procedures
      */
     void displayAvailableOperations(string string);
 
@@ -51,7 +51,7 @@ private:
     void printResult(string result);
 
     /**
-     * Enclose a string between "<>"
+     * Enclose a string identified by typeIdentifier between "<>"
      * @param typeIdentifier the string to be enclosed
      * @return the string enclosed by "<>"
      */

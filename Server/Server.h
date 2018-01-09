@@ -69,6 +69,11 @@ public:
     Server(int port);
 
     /**
+     * Destructor
+     */
+    ~Server();
+
+    /**
      * Start server.
      */
     void startServer();

@@ -32,6 +32,10 @@ Server::Server(int port) {
     listenConnections();
 }
 
+Server::~Server() {
+    close(socketDescriptor);
+}
+
 void Server::prepareDataStructures() {
     bzero(&this->server, sizeof(this->server));
     bzero(&this->from, sizeof(this->from));
@@ -58,12 +62,12 @@ void Server::bindSocket() {
     }
 }
 
+
 void Server::listenConnections() {
     if (listen(socketDescriptor, 5) == -1) {
         printf("[server]Error at listen().\n");
     }
 }
-
 
 void Server::startServer() {
     while (1) {
@@ -191,6 +195,7 @@ void Server::handleAdd(int sd, xml_document &doc) {
     sendResponse(sd, result);
 }
 
+
 void Server::handleSub(int sd, xml_document &doc) {
     int a;
     int b;
@@ -198,7 +203,6 @@ void Server::handleSub(int sd, xml_document &doc) {
     string result = "<response>" + to_string(a - b) + "</response>";
     sendResponse(sd, result);
 }
-
 
 void Server::handleMul(int sd, xml_document &doc) {
     int a;
@@ -209,11 +213,23 @@ void Server::handleMul(int sd, xml_document &doc) {
 }
 
 void Server::handleDiv(int sd, xml_document &doc) {
-    int a;
-    int b;
-    getArguments(sd, doc, a, b);
-    string result = "<response>" + to_string(a / b) + "</response>";
-    sendResponse(sd, result);
+    xml_node arguments = doc.document_element().child("operation").child("arguments");
+    if (countArguments(arguments) != 2) {
+        sendResponse(sd, "<response>The operation must have two arguments.</response>");
+    }
+
+    xml_node argument = arguments.child("argument");
+
+    int a = stoi(argument.child_value());
+    int b = stoi(argument.next_sibling().child_value());
+
+    if(b == 0){
+        sendResponse(sd, "<response>The second argument is 0: divide by 0.</response>");
+    }
+    else {
+        string result = "<response>" + to_string(a / b) + "</response>";
+        sendResponse(sd, result);
+    }
 }
 
 void Server::handleToUppercase(int sd, xml_document &doc) {
