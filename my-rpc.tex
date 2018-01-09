@@ -423,15 +423,16 @@ Below we present two scenarios of use in which the actors are represented by the
 	\umlusecase[x=-2, y=-1, name=call operation x]{call operation x} 
 	\umlusecase[x=0, y=1, name=compute]{compute} 
 	\umlusecase[x=-2, y=-3, name=return result]{return result}
-	\umlusecase[x=-6, y=2, name=print result]{print result}
+	\umlusecase[x=-6, y=1, name=print result]{print result}
+	\umlusecase[x=-6, y=3, name=display operations]{display operations}
 	\umlactor[x=-9, y=4, anchor=west]{User} 
 	\umlactor[x=-9, y=1, anchor=west]{UI} 
 	\umlactor[x=-9,  y=-3, anchor=west]{Client}  
 	\umlactor[x=4, y=-3, anchor=east]{Server} 
+	\umlassoc{UI}{display operations}
 	\umlassoc{UI}{call operation}
 	\umlassoc{call operation}{Client}
 	\umlassoc{UI}{print result}
-	\umlassoc{print result}{User}
 	\umlassoc{User}{UI}
 	\umlassoc{Server}{compute}
 	\umlassoc{Client}{call operation x}
