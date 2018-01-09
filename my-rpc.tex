@@ -1,0 +1,462 @@
+% This is LLNCS.DEM the demonstration file of
+% the LaTeX macro package from Springer-Verlag
+% for Lecture Notes in Computer Science,
+% version 2.4 for LaTeX2e as of 16. April 2010
+%
+\documentclass{llncs}
+%
+\usepackage{makeidx}  % allows for indexgeneration
+\usepackage{hyperref}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{tikz-uml}
+\usetikzlibrary{shapes,arrows}
+\usepackage{verbatim}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+
+
+%https://github.com/ioanabirsan/databases-ontology-paper/blob/master/manuscript.tex
+% Establish style settings.
+\sloppy
+\hypersetup{
+  colorlinks    = true, 
+  urlcolor       = blue, % External URLs color.
+  linkcolor     = blue, % Internal links color.
+}
+
+%
+\begin{document}
+\pagenumbering{arabic}
+\setcounter{page}{1}
+%
+\frontmatter          % for the preliminaries
+%
+\pagestyle{headings}  % switches on printing of running heads
+
+
+\title{MyRPC}
+\author{Birsan C. Ioana (cas. Amariei), B5}
+\institute{Alexandru Ioan Cuza University of Iasi}
+
+\maketitle
+
+\section*{Introduction}
+This technical report is mainly addressed to computer science students that have basic knowledge regarding computer network concepts. The purpose of this report is to:
+\begin{enumerate}
+\item Understand the requirements for the MyRPC project: we are asked to implement a client-server application that allows calls for remote procedures. We know that the server has access to a list of predefined procedures and the client has the ability to get the list and send requests to the server. A protocol for making requests and providing answers will be defined.
+\item Propose a solution that meets those requirements: in doing this, we describe the technologies we will use and explain each choice, create an application architecture, and provide use-cases that helps us clarify the client-server interaction.
+\end{enumerate}
+
+\section*{Technologies}
+In implementing this project I chose the following technologies: 
+	\begin{enumerate}
+		\item C++ because it is an object-oriented programming language that allows data abstraction and modularity; 
+		\item The TCP client-server model folds better in this particular case because data reaches its destination in time without duplication and it automatically brakes data into packages.
+		Despite being slower than the UDP client-server model, the last one comes with no guarantees regarding delivery, I have to manually break the data into packages and it would be difficult to reconstruct packages. 
+		\item pugixml for parsing an XML document because the library is extremely portable and easy to integrate and use.
+	\end{enumerate}
+	
+	
+\section*{Application architecture}
+
+In the figure below is presented the client-server application architecture: the server component provides a function or service to one or many clients, which initiate requests for such services.
+\begin{figure}
+\caption{Application architecture}
+\begin{center}
+\begin{tikzpicture}
+ 	\begin{umlseqdiag}
+ 		\umlmulti[x=-3, y=0]{Client}
+ 		\umlobject[x=3, y=0]{Server}
+ 			\begin{umlcall}[dt=5, op=request, return=response]{Client}{Server}	
+			\end{umlcall}
+	\end{umlseqdiag}
+\end{tikzpicture}
+\end{center}
+\end{figure}
+
+In the sequence diagram below is presented the detailed interaction between the client and the server. The client makes a request for the procedures list that are contained in server and the server answers to this request by sending the available procedures in XML format. The client is responsible with the parsing of the document. 
+\parskip = \baselineskip  % one line between paragraphs
+When is finished it sends a new request with the name of the procedure and its parameters. The server computes the operation and returns its result to the client which will then display the result. 
+
+\begin{figure}
+	\centering
+	\caption{UI - Client - Server interaction}	
+	\parskip = \baselineskip  % one line between paragraphs
+ 	\begin{tikzpicture}
+ 		\begin{umlseqdiag}
+ 	
+ 			\umlobject[x=-5, y=0]{UI}
+ 			\umlobject[x=0, y=0]{Client}
+ 			\umlobject[x=5, y=0]{Server}
+ 			
+ 			\begin{umlcall}[dt=5, ]{UI}{Client}	
+			\end{umlcall}
+			\begin{umlcall}[dt=5, ]{Client}{UI}	
+			\end{umlcall}
+			
+			\begin{umlcallself}[dt=5, op=parseXML()]{UI}    
+     			\end{umlcallself}
+     			\begin{umlcallself}[dt=5, op=displayOperations()]{UI}    
+     			\end{umlcallself}
+     			\begin{umlcallself}[dt=5, op=obtainRequestFromUser()]{UI}    
+     			\end{umlcallself}
+			
+			\begin{umlcall}[dt=5, op=getOperationListFromServer(), return=sendResponse()]{Client}{Server}	
+			\begin{umlcallself}[dt=5, op=parseXML()]{Server}    
+     			\end{umlcallself}
+			\end{umlcall}
+			
+ 			\begin{umlcall}[dt=5, op=makeOperationRequest()), return=sendResponse()]{UI}{Client}	
+			\begin{umlcallself}[dt=5, op=parseXML()]{UI}    
+     			\end{umlcallself}
+			\end{umlcall}
+			\begin{umlcallself}[dt=5, op=printResult()]{UI}    
+     			\end{umlcallself}
+			
+     			\begin{umlcall}[dt=5, op={makeOperationRequest()}, return=
+sendResponse()]{Client}{Server}	
+     			\begin{umlcallself}[dt = 5, op=parseXML()]{Server}
+     			\end{umlcallself}
+     			\begin{umlcallself}[dt = 5, op=handleOperationCall()]{Server}
+     			\end{umlcallself}
+     			\end{umlcall} 
+     			
+     			
+      	\end{umlseqdiag}  
+	\end{tikzpicture}
+\end{figure}
+
+\section*{Implementation details}
+The application uses a TCP client-server model, with a concurrent server implemented using the fork() aproach. 
+I have used fork() as a mechanism of creating new processes because it is simple to implement and completely satisfies the requiremets for application.
+The server is responsible with receiving requests from clients (operation list or operation call) and sending back the appropiate response.
+
+\lstset { %
+    language=C++,
+    backgroundcolor=\color{black!5}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+ \begin{lstlisting}
+void Server::startServer() {
+    while (1) {
+        socklen_t length = sizeof(this->from);
+
+        printf("[server]Waiting at port %d...\n", port);
+        fflush(stdout);
+
+        int clientSocketDescriptor = accept(socketDescriptor,
+        			 (struct sockaddr *) &this->from, &length);
+
+        if (clientSocketDescriptor < 0) {
+            perror("[server] Error at accept().\n");
+            continue;
+        }
+
+        this->pid = fork();
+
+        if (this->pid < 0) {
+            perror("Error at fork().\n");
+            continue;
+        }
+
+        if (this->pid == 0) {
+            int size = readInt(clientSocketDescriptor);
+            char *requestBuffer = readBuffer(clientSocketDescriptor, size);
+
+            printf("[server]Message received...%s\n", requestBuffer);
+
+            string request(requestBuffer);
+
+            xml_document doc;
+            xml_parse_result result = doc.load_string(request.c_str());
+
+            string requestType = doc.document_element().attribute("type").value();
+
+            if (!result) {
+                cout << "Parsed with errors" << endl;
+                cout << result.description() << endl;
+                const char *buffer = "The XML document could not be parsed.";
+                sendResponse(clientSocketDescriptor, buffer);
+            } else if (requestType.compare("operationList") == 0) {
+                sendFile(clientSocketDescriptor);
+            } else if (requestType.compare("operationCall") == 0) {
+                handleOperationCall(clientSocketDescriptor, doc);
+            } else {
+                cout << "Received an invalid request: " << request << endl;
+                const char *buffer = "The request is not valid. No such operation.";
+                sendResponse(clientSocketDescriptor, buffer);
+            }
+
+            close(clientSocketDescriptor);
+        } else {
+            /**
+             * @https://profs.info.uaic.ro/~eonica/rc/lab07e.html
+             */
+            waitpid(pid, &this->status, WNOHANG);
+        }
+    }
+}
+\end{lstlisting}
+In the server, the child processes that ended can be "cleaned" by calling a non-blocking waitpid() using the WNOHANG parameter.
+The advantage, besides simultaneously handling multiple clients is also that the client waits a small amount of time for the connection to be accepted. The server continues the loop for accepting client connections almost immediately, the children handling the client requests. 
+
+\parskip = \baselineskip  % one line between paragraphs
+In terms of the list of procedures that the server makes available to clients, I considered a list of mathematical procedures. I used a XML document format as appropiate to represent the information.
+
+\lstset{
+  language=XML,
+  morekeywords={encoding,
+    xs:schema,xs:element,xs:complexType,xs:sequence,xs:attribute}
+}
+ \begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<operations>
+    <operation>
+        <name>add</name>
+        <arguments>
+            <type>int</type>
+            <type>int</type>
+        </arguments>
+        <resultType>int</resultType>
+    </operation>
+    <operation>
+        <name>sub</name>
+        <arguments>
+            <type>int</type>
+            <type>int</type>
+        </arguments>
+        <resultType>int</resultType>
+    </operation>
+    <operation>
+        <name>mul</name>
+        <arguments>
+            <type>int</type>
+            <type>int</type>
+        </arguments>
+        <resultType>int</resultType>
+    </operation>
+    <operation>
+        <name>div</name>
+        <arguments>
+            <type>int</type>
+            <type>int</type>
+        </arguments>
+        <resultType>int</resultType>
+    </operation>
+    <operation>
+        <name>sum</name>
+        <arguments>
+            <type>int+</type>
+        </arguments>
+        <resultType>int</resultType>
+    </operation>
+    <operation>
+        <name>to_uppercase</name>
+        <arguments>
+            <type>string</type>
+        </arguments>
+        <resultType>int</resultType>
+    </operation>
+</operations>
+ \end{lstlisting}
+
+
+The UI class is used to realize the interaction between the user and the client, by following the next steps:\begin{enumerate}
+				\item obtain the list of procedures
+				\item display the list of procedures
+ 				\item obtain request from user
+				\item send request to client
+				\item obtain result and display it
+			\end{enumerate}
+
+
+\lstset { %
+    language=C++,
+    backgroundcolor=\color{black!5}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+ \begin{lstlisting}
+ void UI::startUserInteraction() {
+    string operations = newClient().getOperationListFromServer();
+    displayAvailableOperations(operations);
+    string request = obtainRequestFromUser();
+    string result = newClient().makeOperationRequest(request);
+    printResult(result);
+}
+
+void UI::displayAvailableOperations(string ops) {
+    xml_document doc;
+    xml_parse_result result = doc.load_string(ops.c_str());
+
+    if (!result) {
+        cout << "Parsed with errors." << endl;
+        cout << result.description() << endl;
+        exit(1);
+    }
+
+    cout << "The list of available operations: " << endl;
+
+    int item = 1;
+    xml_node operations = doc.document_element();
+    for (xml_node operation : operations.children()) {
+        cout << item++ << ". " << operation.child("name").child_value() << " ";
+
+        xml_node arguments = operation.child("arguments");
+        for (xml_node type: arguments.children()) {
+            cout << encloseTypeIdentifier(type.child_value()) << " ";
+        }
+        cout << endl;
+    }
+}
+
+string UI::obtainRequestFromUser() {
+    cout << "Call desired function: ";
+    char request[256];
+    cin.getline(request, 256);
+
+    xml_document doc;
+    xml_node requestNode = doc.append_child("request");
+    requestNode.append_attribute("type") = "operationCall";
+    xml_node operation = requestNode.append_child("operation");
+
+    list<string> tokens = split(request, " ");
+    string& name = tokens.front();
+    operation.append_child("name")
+    			.append_child(pugi::node_pcdata).set_value(name.c_str());
+    tokens.pop_front();
+
+    xml_node arguments = operation.append_child("arguments");
+    for(string& argument : tokens) {
+        arguments.append_child("argument")
+        	.append_child(pugi::node_pcdata).set_value(argument.c_str());
+    }
+
+    stringstream ss;
+    doc.save(ss, "  ");
+
+    return string(ss.str());
+}
+
+void UI::printResult(string result) {
+    xml_document doc;
+    xml_parse_result parse_result = doc.load_string(result.c_str());
+
+    if (!parse_result) {
+        cout << "Parsed with errors." << endl;
+        cout << parse_result.description() << endl;
+        exit(1);
+    }
+
+    cout << "The result is: " << doc.document_element().child_value() << endl;
+}
+\end{lstlisting}
+
+The client is responsible with: obtaining the list of procedures from server, making the operation  request  to server and obtaining the result.
+
+\lstset { %
+    language=C++,
+    backgroundcolor=\color{black!5}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
+
+ \begin{lstlisting}
+string Client::getOperationListFromServer() {
+    sendOperationListRequestToServer();
+    return getOperationListResponseFromServer();
+
+}
+
+void Client::sendOperationListRequestToServer() {
+    string request = "<request type=\"operationList\" />";
+    writeInt(socketDescriptor, request.length());
+    writeBuffer(socketDescriptor, request);
+}
+
+string Client::getOperationListResponseFromServer() {
+    int length = readInt(socketDescriptor);
+    char *buffer = readBuffer(socketDescriptor, length);
+
+    return string(buffer);
+}
+
+string Client::makeOperationRequest(string request) {
+    writeInt(socketDescriptor, request.length());
+    writeBuffer(socketDescriptor, request);
+
+    int size = readInt(socketDescriptor);
+    char* buffer = readBuffer(socketDescriptor, size);
+
+    return string(buffer);
+}
+\end{lstlisting}
+
+
+
+Below we present two scenarios of use in which the actors are represented by the client, server and user. The first scenario describes the manner in which initialization of client-server communication takes place. The second one shows how the user interacts with the client (application) to send the input needed to perform some operations, then the client is responsible for passing to the server the information which then provides the answer.
+
+\begin{figure}
+\begin{center}
+\caption{Initialization}
+\parskip = \baselineskip  % one line between paragraphs
+\begin{tikzpicture}
+	\umlusecase[x=-2, y=6, name=get available procedures]{get available procedures} 
+	\umlusecase[x=-2, y=4, name=return available procedures]{return available procedures} 
+	\umlactor[x=-8, y=5, anchor=west]{Client}  
+	\umlactor[x=4, y=5, anchor=east]{Server}  
+	\umlassoc{Client}{get available procedures}
+	\umlassoc{Server}{return available procedures}
+	\umlinherit{get available procedures}{Server}
+	\umlinherit{return available procedures}{Client}
+\end{tikzpicture}
+
+\parskip = \baselineskip  % one line between paragraphs
+
+\caption{Procedure call}
+\begin{tikzpicture}
+	\umlusecase[x=-9, y=-1, name=call operation]{call operation} 
+	\umlusecase[x=-2, y=-1, name=call operation x]{call operation x} 
+	\umlusecase[x=0, y=1, name=compute]{compute} 
+	\umlusecase[x=-2, y=-3, name=return result]{return result}
+	\umlusecase[x=-6, y=2, name=print result]{print result}
+	\umlactor[x=-9, y=4, anchor=west]{User} 
+	\umlactor[x=-9, y=1, anchor=west]{UI} 
+	\umlactor[x=-9,  y=-3, anchor=west]{Client}  
+	\umlactor[x=4, y=-3, anchor=east]{Server} 
+	\umlassoc{UI}{call operation}
+	\umlassoc{call operation}{Client}
+	\umlassoc{UI}{print result}
+	\umlassoc{print result}{User}
+	\umlassoc{User}{UI}
+	\umlassoc{Server}{compute}
+	\umlassoc{Client}{call operation x}
+	\umlassoc{Server}{return result}
+	\umlinherit{call operation x}{Server}
+	\umlinherit{return result}{Client}
+\end{tikzpicture}
+\end{center}
+\end{figure}
+
+\section*{Conclusions}
+We presented the requirements for the MyRPC project and described a solution that satisfies them. With regard to a possible improvement of the proposed solution, optimization is desirable for the server side, because in this model there is a problem with the potential overburden in server with children and also the time lost for creating and eliminating from the system new processes for each new connection.
+
+
+\section*{Bibliography}
+
+	\begin{itemize}  
+		\item \url{http://csapp.cs.cmu.edu/2e/ch12-preview.pdf}
+		\item \url{http://www.tenouk.com/Module39.html}
+		\item \url{https://pugixml.org/docs/quickstart.html#access}
+		\item \url{https://profs.info.uaic.ro/~eonica/rc/lab07e.html}
+		\item\url{ http://perso.ensta-paristech.fr/~kielbasi/tikzuml/var/files/html/web-tikz-uml-userguide.html}
+		\item\url{ https://en.wikipedia.org/wiki/Client%E2%80%93server_model}
+		\item \url{https://docstore.mik.ua/orelly/xml/xmlnut/index.htm}
+		\item \url{https://en.wikipedia.org/wiki/Use_case}
+	\end{itemize}
+
+\end{document}
