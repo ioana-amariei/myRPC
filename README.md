@@ -17,12 +17,12 @@ CMake 3.8 or higher is required.
 3. in the terminal for Client make request for an operation from the next list:
 
 The list of available operations: 
-add \<int\> \<int\> 
-sub \<int\> \<int\> 
-mul \<int\> \<int\> 
-div \<int\> \<int\> 
-sum <int+> 
-to_uppercase \<string\> 
+1. add \<int\> \<int\> 
+2. sub \<int\> \<int\> 
+3. mul \<int\> \<int\> 
+4. div \<int\> \<int\> 
+5. sum <int+> 
+6. to_uppercase \<string\> 
 
 ### Bibliography
 
