@@ -1,3 +1,2 @@
-html/* linguist-vendored
-latex/* linguist-vendored
-pugixml/* linguist-vendored
+Client/pugixml/* linguist-vendored
+Server/pugixml/* linguist-vendored
