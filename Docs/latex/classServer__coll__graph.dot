@@ -1,6 +1,0 @@
-digraph "Server"
-{
-  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
-  node [fontname="Helvetica",fontsize="10",shape=record];
-  Node1 [label="{Server\n|- server\l- from\l- status\l- pid\l- socketDescriptor\l- port\l|+ Server()\l+ ~Server()\l+ startServer()\l- prepareDataStructures()\l- initializeStructure()\l- sendFile()\l- createSocket()\l- bindSocket()\l- listenConnections()\l- sendResponse()\l- handleOperationCall()\l- handleAdd()\l- handleSum()\land 6 more...\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
-}
