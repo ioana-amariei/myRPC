@@ -1,10 +1,9 @@
 # myRPC
 
-### Description
-MyRPC project implements a client / server application that allows remote procedures to be called. The server contains a list of predefined procedures, the client being able to get this list and send requests to the server. A protocol for making requests and providing answers was defined.
+### Introduction
+Client-server application that simulates the RPC protocol. The server exposes a list of predefined procedures using XML documents, while the client is able to retrieve the list, parse it, send requests to the server, and display the results of the invocations. The communication between the client and the server was done using the Socket API. 
 
-### Libraries
-[pugixml](https://pugixml.org/docs/quickstart.html)
+**Tech: C++, pugixml**
 
 ### Compile
 
@@ -23,6 +22,9 @@ The list of available operations:
 4. `div <int> <int>` 
 5. `sum <int+>` 
 6. `to_uppercase <string>` 
+
+### Libraries
+[pugixml](https://pugixml.org/docs/quickstart.html)
 
 ### Bibliography
 - [https://profs.info.uaic.ro/~computernetworks/cursullaboratorul.php](https://profs.info.uaic.ro/~computernetworks/cursullaboratorul.php)
